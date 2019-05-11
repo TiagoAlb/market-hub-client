@@ -104,7 +104,7 @@ class Marketplaces extends Component {
     }
 
     companyMarketplaces() {
-        if(this.state.companyMarketplaces.content) {
+        if(this.state.companyMarketplaces.totalElements > 0) {
             return (
                 <div>
                     {this.state.companyMarketplaces.content.map((marketplace) => {
@@ -122,7 +122,9 @@ class Marketplaces extends Component {
                     })}
                 </div>
             );
-        } else return <Alert color="info">Não existem marketplaces vinculados!</Alert>;
+        } else {
+            return <Alert color="info">Não existem marketplaces vinculados!</Alert>
+        }
     }
 
     render() {
