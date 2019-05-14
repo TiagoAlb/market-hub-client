@@ -5,9 +5,13 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import Screen from "Useful/Screen.jsx";
 import MarketplaceService from "../../services/MarketplaceServices/MarketplaceService";
 import CompanyService from "../../services/CompanyServices/CompanyService.jsx";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Iframe from 'react-iframe';
 import { Container, Row, Col, 
          Form, FormGroup, Label, 
-         Input, FormText, Alert } from "reactstrap";
+         Input, FormText, Alert,
+         Button, Modal, ModalHeader, 
+         ModalBody, ModalFooter } from "reactstrap";
 
 class Marketplaces extends Component {
     constructor(props) {
@@ -16,12 +20,16 @@ class Marketplaces extends Component {
           width: Screen.getWidth(),
           linkMarketplaceID: "",
           availableMarketplaces: [],
-          companyMarketplaces: {}
+          companyMarketplaces: {},
+          modal: false, 
+          hasMore: false,
+          nextPage: 0
         };
         this.MarketplaceService = new MarketplaceService();
         this.CompanyService = new CompanyService();
         this.availableMarketplacesList();
         this.companyMarketplacesList();
+        this.toggle = this.toggle.bind(this);
     }
 
     componentDidMount() {
@@ -44,11 +52,27 @@ class Marketplaces extends Component {
         );
     }
 
+    toggle() {
+        this.setState(prevState => ({
+          modal: !prevState.modal
+        }));
+      }
+
     companyMarketplacesList() {
-        this.CompanyService.readMarketplaces(this.props.profile.id, 0,
+        console.log(this.state.nextPage);
+        this.CompanyService.readMarketplaces(this.props.profile.id, this.state.nextPage,
             (result) => {
-                console.log(result);
-                this.setState({companyMarketplaces: result});
+                if(this.state.companyMarketplaces.totalElements > 0) {
+                    let newArray = this.state.companyMarketplaces;
+                    newArray.numberOfElements = newArray.numberOfElements + result.numberOfElements;
+                    newArray.content.concat(result.content);
+                    this.setState({companyMarketplaces: newArray});
+                } else {
+                    this.setState({companyMarketplaces: result});
+                }
+                if(result.totalPages-1>this.state.nextPage) {
+                    this.setState({nextPage: this.state.nextPage+1, hasMore: false});
+                }
             },
             (erro) => {
                 console.log("Erro:");
@@ -62,6 +86,7 @@ class Marketplaces extends Component {
             (success) => {
                 console.log(success);
                 this.availableMarketplacesList();
+                this.setState({companyMarketplaces: {}, nextPage: 0, hasMore: false});
                 this.companyMarketplacesList();
             },(error) => {
                 console.log("Erro!");
@@ -104,9 +129,20 @@ class Marketplaces extends Component {
     }
 
     companyMarketplaces() {
+        console.log("AQUI RESULTADOS: ");
+        console.log("MARKETPLACES: ");
+        console.log(this.state.companyMarketplaces);
+        console.log("PAGINA: ");
+        console.log(this.state.nextPage);
         if(this.state.companyMarketplaces.totalElements > 0) {
             return (
                 <div>
+                     <InfiniteScroll
+                        dataLength={this.state.companyMarketplaces.totalElements}
+                        next={this.companyMarketplacesList}
+                        hasMore={this.state.hasMore}
+                        loader={<h4>Carregando...</h4>}
+                    >
                     {this.state.companyMarketplaces.content.map((marketplace) => {
                         return <ImageCard
                             avatar={Logo}
@@ -114,12 +150,14 @@ class Marketplaces extends Component {
                             <h3>{marketplace.name}</h3>
                             }   
                             options={
-                            <a href="/marketplaceLogin" style={{ color: 'RED', fontFamily: 'Roboto', fontStyle: 'normal', fontWeight: '300', lineHeight: 'normal' }}>
-                                CONECTAR</a>
+                            <Button color="danger" onClick={this.toggle}>
+                                CONECTAR
+                            </Button>
                             }
                             width={this.state.width}
                         />
                     })}
+                    </InfiniteScroll>
                 </div>
             );
         } else {
@@ -137,6 +175,22 @@ class Marketplaces extends Component {
                             {this.companyMarketplaces()}
                         </Col>
                     </Row>
+                    <div>
+                        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                        <ModalHeader toggle={this.toggle}>Login</ModalHeader>
+                        <ModalBody>
+                            <Iframe url="https://www.mercadolivre.com/jms/mlb/lgz/login?platform_id=ml&go=https%3A%2F%2Fwww.mercadolivre.com.br%2F&loginType=explicit#nav-header"
+                                width="100%"
+                                id="marketplaceLogin"
+                                height="100%"
+                                frameBorder="0"
+                            />
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                        </ModalFooter>
+                        </Modal>
+                    </div>
                 </Container>
             </div>
         );

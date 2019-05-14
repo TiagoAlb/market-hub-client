@@ -106,6 +106,8 @@ export default class CompanyService extends RestService {
         });
     }
     readMarketplaces(id, page, success, error) {
+        console.log("AQUI SERVIÇO: ");
+        console.log(page);
         let treatFetch = (result) => {
             if (result.ok) {
                 result.json().then(success)
