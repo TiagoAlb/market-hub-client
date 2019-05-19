@@ -28,7 +28,7 @@ class Marketplaces extends Component {
         this.MarketplaceService = new MarketplaceService();
         this.CompanyService = new CompanyService();
         this.availableMarketplacesList();
-        this.companyMarketplacesList();
+        this.companyMarketplacesList.call(this);
         this.toggle = this.toggle.bind(this);
     }
 
@@ -58,7 +58,8 @@ class Marketplaces extends Component {
         }));
       }
 
-    companyMarketplacesList() {
+    companyMarketplacesList = () => {
+        console.log("Entrou aqui");
         console.log(this.state.nextPage);
         this.CompanyService.readMarketplaces(this.props.profile.id, this.state.nextPage,
             (result) => {
@@ -138,9 +139,10 @@ class Marketplaces extends Component {
             return (
                 <div>
                      <InfiniteScroll
-                        dataLength={this.state.companyMarketplaces.totalElements}
-                        next={this.companyMarketplacesList}
+                        pageStart={0}
+                        loadMore={this.companyMarketplacesList}
                         hasMore={this.state.hasMore}
+                        useWindow={false}
                         loader={<h4>Carregando...</h4>}
                     >
                     {this.state.companyMarketplaces.content.map((marketplace) => {
