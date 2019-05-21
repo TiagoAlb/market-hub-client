@@ -7,6 +7,7 @@ import MarketplaceService from "../../services/MarketplaceServices/MarketplaceSe
 import CompanyService from "../../services/CompanyServices/CompanyService.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Iframe from 'react-iframe';
+import MarketplacesList from "./MarketplacesList";
 import { Container, Row, Col, 
          Form, FormGroup, Label, 
          Input, FormText, Alert,
@@ -20,15 +21,12 @@ class Marketplaces extends Component {
           width: Screen.getWidth(),
           linkMarketplaceID: "",
           availableMarketplaces: [],
-          companyMarketplaces: {},
           modal: false, 
-          hasMore: false,
-          nextPage: 0
+          update: false
         };
         this.MarketplaceService = new MarketplaceService();
         this.CompanyService = new CompanyService();
         this.availableMarketplacesList();
-        this.companyMarketplacesList.call(this);
         this.toggle = this.toggle.bind(this);
     }
 
@@ -56,30 +54,6 @@ class Marketplaces extends Component {
         this.setState(prevState => ({
           modal: !prevState.modal
         }));
-      }
-
-    companyMarketplacesList = () => {
-        console.log("Entrou aqui");
-        console.log(this.state.nextPage);
-        this.CompanyService.readMarketplaces(this.props.profile.id, this.state.nextPage,
-            (result) => {
-                if(this.state.companyMarketplaces.totalElements > 0) {
-                    let newArray = this.state.companyMarketplaces;
-                    newArray.numberOfElements = newArray.numberOfElements + result.numberOfElements;
-                    newArray.content.concat(result.content);
-                    this.setState({companyMarketplaces: newArray});
-                } else {
-                    this.setState({companyMarketplaces: result});
-                }
-                if(result.totalPages-1>this.state.nextPage) {
-                    this.setState({nextPage: this.state.nextPage+1, hasMore: false});
-                }
-            },
-            (erro) => {
-                console.log("Erro:");
-                console.log(erro);
-            }
-        );
     }
 
     linkMarketplace() {
@@ -87,8 +61,7 @@ class Marketplaces extends Component {
             (success) => {
                 console.log(success);
                 this.availableMarketplacesList();
-                this.setState({companyMarketplaces: {}, nextPage: 0, hasMore: false});
-                this.companyMarketplacesList();
+                this.setState({update: true});
             },(error) => {
                 console.log("Erro!");
                 console.log(error);
@@ -98,7 +71,7 @@ class Marketplaces extends Component {
 
     setValues(attribute, value) {
         this.setState(
-            (estado) => estado[attribute] = value
+            (prop) => prop[attribute] = value
         );
     }
 
@@ -129,44 +102,6 @@ class Marketplaces extends Component {
         } else return "";
     }
 
-    companyMarketplaces() {
-        console.log("AQUI RESULTADOS: ");
-        console.log("MARKETPLACES: ");
-        console.log(this.state.companyMarketplaces);
-        console.log("PAGINA: ");
-        console.log(this.state.nextPage);
-        if(this.state.companyMarketplaces.totalElements > 0) {
-            return (
-                <div>
-                     <InfiniteScroll
-                        pageStart={0}
-                        loadMore={this.companyMarketplacesList}
-                        hasMore={this.state.hasMore}
-                        useWindow={false}
-                        loader={<h4>Carregando...</h4>}
-                    >
-                    {this.state.companyMarketplaces.content.map((marketplace) => {
-                        return <ImageCard
-                            avatar={Logo}
-                            content={
-                            <h3>{marketplace.name}</h3>
-                            }   
-                            options={
-                            <Button color="danger" onClick={this.toggle}>
-                                CONECTAR
-                            </Button>
-                            }
-                            width={this.state.width}
-                        />
-                    })}
-                    </InfiniteScroll>
-                </div>
-            );
-        } else {
-            return <Alert color="info">Não existem marketplaces vinculados!</Alert>
-        }
-    }
-
     render() {
         return (
             <div className="content">
@@ -174,7 +109,11 @@ class Marketplaces extends Component {
                     {this.availableMarketplaces()}
                     <Row>
                         <Col md={12}>
-                            {this.companyMarketplaces()}
+                            <MarketplacesList 
+                                update={this.state.update} 
+                                marketplaces={this.state.page} 
+                                profile_id={this.props.profile.id}
+                            />
                         </Col>
                     </Row>
                     <div>
@@ -188,9 +127,6 @@ class Marketplaces extends Component {
                                 frameBorder="0"
                             />
                         </ModalBody>
-                        <ModalFooter>
-                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                        </ModalFooter>
                         </Modal>
                     </div>
                 </Container>

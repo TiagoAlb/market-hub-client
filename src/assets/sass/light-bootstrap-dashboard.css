@@ -866,23 +866,24 @@ body > .navbar-collapse[data-color="purple"]:after {
 .input-group-focus .input-group-addon {
   border-color: #9A9A9A; }
 
-.input-file .fileUpload {
-  overflow: hidden;
-  width: 100%;
+.input-file {
   cursor: pointer; }
-
-.input-file .fileUpload input.upload {
-  position: absolute;
-  cursor: pointer;
-  font-size: 20px;
-  opacity: 0;
-  filter: alpha(opacity=0); }
-
-.input-file .fileUpload img {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-  cursor: pointer; }
+  .input-file .fileUpload {
+    overflow: hidden;
+    width: 100%;
+    cursor: pointer; }
+  .input-file .fileUpload input.upload {
+    position: absolute;
+    cursor: pointer;
+    font-size: 20px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer; }
+  .input-file .fileUpload img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    cursor: pointer; }
 
 .alert {
   border: 0;

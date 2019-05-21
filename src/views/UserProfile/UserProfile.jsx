@@ -7,8 +7,9 @@ import {
   ControlLabel,
   FormControl
 } from "react-bootstrap";
-
 import { Card } from "components/Card/Card.jsx";
+import InputFile from "../../components/InputFile/InputFile";
+import Upload from "../../assets/img/upload.png";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import { UserCard } from "components/UserCard/UserCard.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
@@ -20,7 +21,8 @@ class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        avatar: `/api/profiles/` + this.props.profile.id + `/image?` + loginService.getAuthorizationGet()
+        avatar: `/api/profiles/` + this.props.profile.id + `/image?` + loginService.getAuthorizationGet(),
+        profile: this.props.profile
     };
   }
   render() {
@@ -30,51 +32,26 @@ class UserProfile extends Component {
           <Row>
             <Col md={8}>
               <Card
-                title="Edit Profile"
+                title="Editar Cadastro"
                 content={
                   <form>
-                    <FormInputs
-                      ncols={["col-md-5", "col-md-3", "col-md-4"]}
-                      proprieties={[
-                        {
-                          label: "Company (disabled)",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Company",
-                          defaultValue: "Creative Code Inc.",
-                          disabled: true
-                        },
-                        {
-                          label: "Username",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Username",
-                          defaultValue: "michael23"
-                        },
-                        {
-                          label: "Email address",
-                          type: "email",
-                          bsClass: "form-control",
-                          placeholder: "Email"
-                        }
-                      ]}
-                    />
                     <FormInputs
                       ncols={["col-md-6", "col-md-6"]}
                       proprieties={[
                         {
-                          label: "First name",
+                          label: "CNPJ / CPF",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "First name",
-                          defaultValue: "Mike"
+                          placeholder: "CNPJ / CPF",
+                          defaultValue: this.props.profile.cnpjCpf,
+                          disabled: true
                         },
                         {
-                          label: "Last name",
+                          label: "Nome Fantasia",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "Last name",
-                          defaultValue: "Andrew"
+                          placeholder: "Nome Fantasia",
+                          defaultValue: this.props.profile.name
                         }
                       ]}
                     />
@@ -82,57 +59,48 @@ class UserProfile extends Component {
                       ncols={["col-md-12"]}
                       proprieties={[
                         {
-                          label: "Adress",
+                          label: "Razão Social",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "Home Adress",
-                          defaultValue:
-                            "Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                          placeholder: "Razão Social",
+                          defaultValue: this.state.profile.legalName
                         }
                       ]}
                     />
                     <FormInputs
-                      ncols={["col-md-4", "col-md-4", "col-md-4"]}
+                      ncols={["col-md-6", "col-md-6"]}
                       proprieties={[
                         {
-                          label: "City",
+                          label: "Email",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "City",
-                          defaultValue: "Mike"
+                          placeholder: "Email",
+                          defaultValue: this.props.profile.emailAddress,
                         },
                         {
-                          label: "Country",
+                          label: "Senha",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "Country",
-                          defaultValue: "Andrew"
-                        },
-                        {
-                          label: "Postal Code",
-                          type: "number",
-                          bsClass: "form-control",
-                          placeholder: "ZIP Code"
+                          placeholder: "**********",
                         }
                       ]}
                     />
-
                     <Row>
                       <Col md={12}>
                         <FormGroup controlId="formControlsTextarea">
-                          <ControlLabel>About Me</ControlLabel>
+                          <ControlLabel>Descrição da Empresa</ControlLabel>
                           <FormControl
                             rows="5"
                             componentClass="textarea"
                             bsClass="form-control"
-                            placeholder="Here can be your description"
-                            defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
+                            placeholder="Descrição da Empresa"
+                            defaultValue={this.state.profile.description}
                           />
                         </FormGroup>
                       </Col>
                     </Row>
-                    <Button bsStyle="info" pullRight fill type="submit">
-                      Update Profile
+                    <Button bsStyle="info" color="success" pullRight fill type="submit">
+                      Alterar
                     </Button>
                     <div className="clearfix" />
                   </form>
@@ -143,15 +111,11 @@ class UserProfile extends Component {
               <UserCard
                 bgImage="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
                 avatar={this.state.avatar}
-                name="Mike Andrew"
-                userName="michael24"
+                name={this.state.profile.name}
+                userName={this.state.profile.emailAddress}
                 description={
                   <span>
-                    "Lamborghini Mercy
-                    <br />
-                    Your chick she so thirsty
-                    <br />
-                    I'm in that two seat Lambo"
+                    {this.state.profile.description}
                   </span>
                 }
                 socials={
@@ -167,6 +131,17 @@ class UserProfile extends Component {
                     </Button>
                   </div>
                 }
+              />
+              <InputFile
+                buttonStyle="simple"
+                backgroundColor="#E53935"
+                textColor="white"
+                text="Importar Imagem"
+                image={Upload}
+                onChange={(e) => {
+                  e.preventDefault();
+                  this._handleImageChange(e);
+                }}
               />
             </Col>
           </Row>
