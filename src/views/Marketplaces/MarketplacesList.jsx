@@ -17,7 +17,7 @@ export default class MarketplacesList extends Component {
         super(props);
         this.state = {           
             items: Array.from({length: 0}),
-            update: this.props.update,
+            message: "Carregando...",
             pageable: {
                 page: 0,
                 totalPages: 0,
@@ -42,9 +42,10 @@ export default class MarketplacesList extends Component {
     nextPage() {
         this.CompanyService.readMarketplaces(this.props.profile_id, this.state.pageable.page,
             (result) => {
-                console.log(result);
                 this.setState({
                     items: this.state.items.concat(result.content),
+                    hasMore: true,
+                    message: result.totalElements > 0 ? "Carregando..." : "Não existem marketplaces vinculados!",
                     pageable: {
                         page:  this.state.pageable.page+1,
                         totalPages: result.totalPages,
@@ -59,27 +60,36 @@ export default class MarketplacesList extends Component {
         );
     }
 
+    updateList () {
+        this.setState({
+            items: Array.from({length: 0}),
+            pageable: {
+                page:  0,
+                totalPages: 0,
+                totalElements: 0
+            }
+        });
+        this.fetchMoreData.call(this);
+    }
+
     render() {
-        if(this.state.update) {
-            this.setState({
-                items: Array.from({length: 0}),
-                update: true,
-                pageable: {
-                    page:  0,
-                    totalPages: 0,
-                    totalElements: 0
-                }
-            });
-            this.fetchMoreData.call(this);
+        if(this.props.update && this.state.items.length > 0) {
+            
         }
+
         if(this.state.items.length > 0) {
             return <div>
                         <InfiniteScroll
                             dataLength={this.state.items.length}
                             next={this.fetchMoreData}
                             hasMore={this.state.hasMore}
-                            loader={<h4>Carregando...</h4>}
-                            endMessage={<Alert color="success">Carregados {this.state.pageable.totalElements} resultados.</Alert>}
+                            loader={<Alert color="info">{this.state.message}</Alert>}
+                            endMessage={
+                                <Alert color="success">
+                                    {this.state.pageable.totalElements}
+                                    {this.state.pageable.totalElements > 1 ? " resultados carregados." : " resultado carregado."} 
+                                </Alert>
+                            }
                         >
                             {this.state.items.map((i, index) => {
                                 return (
@@ -90,7 +100,7 @@ export default class MarketplacesList extends Component {
                                             <h3>{i.name}</h3>
                                         }   
                                         options={
-                                            <Button color="danger" onClick={this.toggle}>
+                                            <Button color="danger" onClick={this.props.toggle}>
                                                 CONECTAR
                                             </Button>
                                         }
@@ -101,7 +111,7 @@ export default class MarketplacesList extends Component {
                         </InfiniteScroll>    
                     </div>
         } else {
-            return <Alert color="info">Não existem marketplaces vinculados!</Alert>
+            return <Alert color="info">{this.state.message}</Alert>
         }
     }
 }

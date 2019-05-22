@@ -21,8 +21,7 @@ class Marketplaces extends Component {
           width: Screen.getWidth(),
           linkMarketplaceID: "",
           availableMarketplaces: [],
-          modal: false, 
-          update: false
+          modal: false
         };
         this.MarketplaceService = new MarketplaceService();
         this.CompanyService = new CompanyService();
@@ -60,8 +59,8 @@ class Marketplaces extends Component {
         this.CompanyService.linkMarketplace(this.props.profile.id, this.state.linkMarketplaceID,
             (success) => {
                 console.log(success);
-                this.availableMarketplacesList();
-                this.setState({update: true});
+                window.location.reload();
+                //this.availableMarketplacesList();
             },(error) => {
                 console.log("Erro!");
                 console.log(error);
@@ -110,9 +109,9 @@ class Marketplaces extends Component {
                     <Row>
                         <Col md={12}>
                             <MarketplacesList 
-                                update={this.state.update} 
-                                marketplaces={this.state.page} 
                                 profile_id={this.props.profile.id}
+                                toggle={this.toggle}
+                                width={this.state.width}
                             />
                         </Col>
                     </Row>
