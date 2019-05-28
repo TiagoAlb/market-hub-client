@@ -6,7 +6,7 @@ import HeaderLinks from "../Header/HeaderLinks.jsx";
 import imagine from "assets/img/sidebar-3.jpg";
 import logo from "assets/img/logo.png";
 
-import loggedRoutes from "routes/loggedRoutes.jsx";
+import sideBarRoutes from "routes/sideBarRoutes.jsx";
 
 class Sidebar extends Component {
   constructor(props) {
@@ -58,7 +58,7 @@ class Sidebar extends Component {
         </div>
         <div className="sidebar-wrapper">
           <ul className="nav">
-            {loggedRoutes.map((prop, key) => {
+            {sideBarRoutes.map((prop, key) => {
               if (!prop.redirect)
                 return (
                   <li

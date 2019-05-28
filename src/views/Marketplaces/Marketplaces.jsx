@@ -6,13 +6,30 @@ import Screen from "Useful/Screen.jsx";
 import MarketplaceService from "../../services/MarketplaceServices/MarketplaceService";
 import CompanyService from "../../services/CompanyServices/CompanyService.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Iframe from 'react-iframe';
+import MarketplaceLogin from './MarketplaceLogin';
 import MarketplacesList from "./MarketplacesList";
 import { Container, Row, Col, 
          Form, FormGroup, Label, 
          Input, FormText, Alert,
          Button, Modal, ModalHeader, 
          ModalBody, ModalFooter } from "reactstrap";
+import loginService from "../../services/LoginService";
+
+const modal_header_style = {
+    backgroundColor: "transparent", 
+    outline: "none", 
+    zIndex: "2", 
+    position: "absolute", 
+    width: "100%", 
+    border: "0"
+}
+
+const modal_body_style = {
+    padding: "0", 
+    zIndex: "1", 
+    width: "100%", 
+    height: "100%"
+}
 
 class Marketplaces extends Component {
     constructor(props) {
@@ -21,7 +38,8 @@ class Marketplaces extends Component {
           width: Screen.getWidth(),
           linkMarketplaceID: "",
           availableMarketplaces: [],
-          modal: false
+          modal: false, 
+          idLogin: 0,
         };
         this.MarketplaceService = new MarketplaceService();
         this.CompanyService = new CompanyService();
@@ -49,9 +67,10 @@ class Marketplaces extends Component {
         );
     }
 
-    toggle() {
+    toggle(id) {
         this.setState(prevState => ({
-          modal: !prevState.modal
+            idLogin: id,
+            modal: !prevState.modal
         }));
     }
 
@@ -102,6 +121,10 @@ class Marketplaces extends Component {
     }
 
     render() {
+        if(this.state.modal!==false && window.location.href === "http://localhost:3000/#/marketplaces/login") {
+            this.toggle(0);
+            window.location.href="/#/marketplaces";
+        }
         return (
             <div className="content">
                 <Container fluid>
@@ -115,19 +138,12 @@ class Marketplaces extends Component {
                             />
                         </Col>
                     </Row>
-                    <div>
-                        <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                        <ModalHeader toggle={this.toggle}>Login</ModalHeader>
-                        <ModalBody>
-                            <Iframe url="https://www.mercadolivre.com/jms/mlb/lgz/login?platform_id=ml&go=https%3A%2F%2Fwww.mercadolivre.com.br%2F&loginType=explicit#nav-header"
-                                width="100%"
-                                id="marketplaceLogin"
-                                height="100%"
-                                frameBorder="0"
-                            />
+                    <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                        <ModalHeader toggle={this.toggle} style={modal_header_style}/>
+                        <ModalBody style={modal_body_style}>
+                            <MarketplaceLogin idLogin={this.state.idLogin}/>
                         </ModalBody>
-                        </Modal>
-                    </div>
+                    </Modal>
                 </Container>
             </div>
         );

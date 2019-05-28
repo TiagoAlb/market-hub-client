@@ -100,7 +100,7 @@ export default class MarketplacesList extends Component {
                                             <h3>{i.name}</h3>
                                         }   
                                         options={
-                                            <Button color="danger" onClick={this.props.toggle}>
+                                            <Button color="danger" value={i.id} onClick={(event) => {this.props.toggle(event.target.value)}}>
                                                 CONECTAR
                                             </Button>
                                         }

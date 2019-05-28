@@ -8,7 +8,7 @@ import Maps from "views/Maps/Maps";
 import Notifications from "views/Notifications/Notifications";
 import Upgrade from "views/Upgrade/Upgrade";
 
-const loggedRoutes = [
+const sideBarRoutes = [
   {
     path: "/dashboard",
     name: "Painel",
@@ -46,8 +46,15 @@ const loggedRoutes = [
     name: "Notificações",
     icon: "pe-7s-bell",
     component: Notifications
-  },
+  }, /*
+  {
+    upgrade: true,
+    path: "/upgrade",
+    name: "Upgrade to PRO",
+    icon: "pe-7s-rocket",
+    component: Upgrade
+  },*/
   { redirect: true, path: "/", to: "/dashboard", name: "Dashboard" }
 ];
 
-export default loggedRoutes;
+export default sideBarRoutes;

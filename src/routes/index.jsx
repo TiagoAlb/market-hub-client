@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import notLoggedRoutes from './notLoggedRoutes';
-import loggedRoutes from './loggedRoutes';
+import loggedRoutes from './sideBarRoutes';
 import Header from '../components/Header/Header';
 import Sidebar from '../components/Sidebar/Sidebar';
 import Login from 'views/Login/Login.jsx';
@@ -48,6 +48,16 @@ class index extends Component {
                         <Header {...this.props}/>
                         <Switch> {
                             loggedRoutes.map((prop, key) => {
+                                if(prop.name === "Teste")
+                                return (
+                                    <Route
+                                            path={prop.path}
+                                            key={key}
+                                            render={(props) => <prop.component  {...props}
+                                                profile={loginService.logged()}/>}
+                                            profile={loginService.logged()}
+                                        />
+                                );
                                 if (prop.name === "Notifications")
                                 return (
                                     <Route
@@ -61,15 +71,15 @@ class index extends Component {
                                     />
                                 );
                                 if (prop.name === "Cadastro")
-                                        return (
-                                            <Route
-                                                path={prop.path}
-                                                key={key}
-                                                render={(props) => <prop.component  {...props}
-                                                                                    profile={loginService.logged()}/>}
-                                                profile={loginService.logged()}
-                                            />
-                                        );
+                                    return (
+                                        <Route
+                                            path={prop.path}
+                                            key={key}
+                                            render={(props) => <prop.component  {...props}
+                                                profile={loginService.logged()}/>}
+                                            profile={loginService.logged()}
+                                        />
+                                    );
                                 if (prop.name === "Marketplaces")
                                     return (
                                         <Route
