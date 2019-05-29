@@ -10,7 +10,7 @@ class MarketplaceLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            authentication: this.getUrlParams(window.location.href).authentication
+            url: this.getUrlParams(window.location.href)
         }
     }
 
@@ -24,7 +24,13 @@ class MarketplaceLogin extends Component {
 
     render() {
         let modalBody = <Spinner color="primary"/>;
-        if(this.state.authentication==='true') {
+        if(this.state.url.authentication==='true') {
+            sessionStorage.setItem("marketplace_authentication", JSON.stringify(
+                                                            {
+                                                                "status": this.state.url.authentication, 
+                                                                "code": this.state.url.code
+                                                            }
+                                                    ));
             window.parent.location.href = "/#/marketplaces/login";
         } else {
             modalBody = <Iframe url="https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=3919471605726765"

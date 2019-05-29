@@ -121,7 +121,9 @@ class Marketplaces extends Component {
     }
 
     render() {
-        if(this.state.modal!==false && window.location.href === "http://localhost:3000/#/marketplaces/login") {
+        let mp_auth = sessionStorage.getItem("marketplace_authentication");
+        if(this.state.modal!==false && mp_auth!==null && JSON.parse(mp_auth).status==='true') {
+            //alert(JSON.parse(mp_auth));
             this.toggle(0);
             window.location.href="/#/marketplaces";
         }
