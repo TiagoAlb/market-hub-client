@@ -6,7 +6,7 @@ export default class RestService {
         this.url = url;
     }
 
-    apagar(id, sucesso, erro) {
+    delete(id, sucesso, erro) {
         fetch(`${this.url}/${id}`, {
                 headers: new Headers({
                     'Authorization': loginService.getAuthorization()
@@ -18,27 +18,6 @@ export default class RestService {
                 sucesso();
             } else {
                 resposta.json().then(erro);
-            }
-
-        });
-    }
-
-    inserir(item, sucesso, erro) {
-        console.log(item);
-        fetch(this.url, {
-            method: "POST",
-            headers: new Headers({
-                'Authorization': loginService.getAuthorization(),
-                'Content-Type': 'application/json'
-            }),
-            body: JSON.stringify(item)
-        }).then((resultado) => {
-            if (resultado.ok) {
-                resultado.json().then(sucesso)
-            } else {
-                resultado.json().then(
-                    (resultadoErro) => erro(resultadoErro)
-                )
             }
 
         });
@@ -65,7 +44,7 @@ export default class RestService {
         });
     }
 
-    editar(id, item, sucesso, erro) {
+    put(id, item, sucesso, erro) {
         console.log(item);
         fetch(`${this.url}/${id}`, {
             method: "PUT",

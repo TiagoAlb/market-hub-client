@@ -87,6 +87,17 @@ class Marketplaces extends Component {
         )
     }
 
+    updateAuthorization(code) {
+        this.MarketplaceService.updateAuthorization(this.props.profile.id, this.state.idLogin, code,
+            (success) => {
+                console.log(success);
+            },(error) => {
+                console.log("Erro!");
+                console.log(error);
+            }
+        )
+    }
+
     setValues(attribute, value) {
         this.setState(
             (prop) => prop[attribute] = value
@@ -123,10 +134,13 @@ class Marketplaces extends Component {
     render() {
         let mp_auth = sessionStorage.getItem("marketplace_authentication");
         if(this.state.modal!==false && mp_auth!==null && JSON.parse(mp_auth).status==='true') {
-            //alert(JSON.parse(mp_auth));
+            this.updateAuthorization(JSON.parse(mp_auth).code);
+            sessionStorage.removeItem("marketplace_authentication");
+            mp_auth = "";
             this.toggle(0);
             window.location.href="/#/marketplaces";
         }
+
         return (
             <div className="content">
                 <Container fluid>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import MarketplaceService from "../../services/MarketplaceServices/MarketplaceService";
 import Iframe from 'react-iframe';
 import { Container, Row, Col, 
     Form, FormGroup, Label, 
@@ -33,6 +34,7 @@ class MarketplaceLogin extends Component {
                                                     ));
             window.parent.location.href = "/#/marketplaces/login";
         } else {
+            sessionStorage.removeItem("marketplace_authentication");
             modalBody = <Iframe url="https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=3919471605726765"
                             id="marketplaceLogin"
                             width="100%"

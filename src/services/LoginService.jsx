@@ -41,6 +41,7 @@ class LoginService {
                     success();
                 })
             } else {
+                sessionStorage.removeItem("token");
                 console.log("error " + response.json().then());
             }
         }).catch();

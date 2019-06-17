@@ -125,7 +125,7 @@ export default class CompanyService extends RestService {
         }).then(treatFetch);
     }
     linkMarketplace(profileID, marketplaceID, success, error) {
-        fetch(`api/profiles/${profileID}/marketplaces/${marketplaceID}`, {
+        fetch(`api/profiles/${profileID}/marketplaces/${marketplaceID}/link`, {
             method: "PUT",
             headers: new Headers({
                 'Authorization': loginService.getAuthorization(),

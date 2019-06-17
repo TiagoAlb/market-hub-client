@@ -7,6 +7,9 @@ import {
   ControlLabel,
   FormControl
 } from "react-bootstrap";
+import {
+  Input, Label
+} from 'reactstrap';
 import { Card } from "components/Card/Card.jsx";
 import InputFile from "../../components/InputFile/InputFile";
 import Upload from "../../assets/img/upload.png";
@@ -25,6 +28,13 @@ class UserProfile extends Component {
         profile: this.props.profile
     };
   }
+
+  setProfileValues(attribute, value) {
+    this.setState(
+        (estado) => estado.profile[attribute] = value
+    );
+  }
+
   render() {
     return (
       <div className="content">
@@ -35,26 +45,35 @@ class UserProfile extends Component {
                 title="Editar Cadastro"
                 content={
                   <form>
-                    <FormInputs
-                      ncols={["col-md-6", "col-md-6"]}
-                      proprieties={[
-                        {
-                          label: "CNPJ / CPF",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "CNPJ / CPF",
-                          defaultValue: this.props.profile.cnpjCpf,
-                          disabled: true
-                        },
-                        {
-                          label: "Nome Fantasia",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Nome Fantasia",
-                          defaultValue: this.props.profile.name
-                        }
-                      ]}
-                    />
+                    <Row>
+                  <Col md={6}>
+                    <FormGroup>
+                      <Label>CNPJ / CPF</Label>
+                      <Input
+                        type="text"
+                        value={this.state.profile.cnpjCpf}
+                        disabled
+                        onChange={(e) => {
+                          e.preventDefault();
+                          this.setProfileValues("name", e.target.value);
+                        }}
+                      />
+                    </FormGroup>
+                  </Col> 
+                  <Col md={6}>
+                    <FormGroup>
+                      <Label>Nome Fantasia</Label>
+                      <Input
+                        type="text"
+                        value={this.state.profile.name}
+                        onChange={(e) => {
+                          e.preventDefault();
+                          this.setProfileValues("name", e.target.value);
+                        }}
+                      />
+                    </FormGroup>
+                  </Col>  
+                  </Row>
                     <FormInputs
                       ncols={["col-md-12"]}
                       proprieties={[
