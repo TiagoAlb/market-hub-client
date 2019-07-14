@@ -73,10 +73,6 @@ export default class MarketplacesList extends Component {
     }
 
     render() {
-        if(this.props.update && this.state.items.length > 0) {
-            
-        }
-
         if(this.state.items.length > 0) {
             return <div>
                         <InfiniteScroll

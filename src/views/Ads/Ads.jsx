@@ -3,6 +3,7 @@ import { Grid, Row, Col } from "react-bootstrap";
 
 import Card from "components/Card/Card";
 import { iconsArray } from "variables/Variables.jsx";
+import{ Ads } from "assets/img/ml.jpg";
 
 class Icons extends Component {
   render() {
@@ -13,6 +14,7 @@ class Icons extends Component {
             <Col md={12}>
               <Card
                 title="202 Awesome Stroke Icons"
+                plain
                 ctAllIcons
                 category={
                   <span>
@@ -38,8 +40,10 @@ class Icons extends Component {
                           className="font-icon-list"
                           key={key}
                         >
+                          
                           <div className="font-icon-detail">
-                            <i className={prop} />
+                            <img src={Ads} width="120px" height="120px"/>
+            
                             <input type="text" defaultValue={prop} />
                           </div>
                         </Col>

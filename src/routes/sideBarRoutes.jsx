@@ -3,7 +3,7 @@ import UserProfile from "views/UserProfile/UserProfile";
 import MarketplacesRoute from "views/Marketplaces/MarketplacesRoute";
 import TableList from "views/TableList/TableList";
 import Typography from "views/Typography/Typography";
-import Icons from "views/Icons/Icons";
+import Ads from "views/Ads/Ads";
 import Maps from "views/Maps/Maps";
 import Notifications from "views/Notifications/Notifications";
 import Upgrade from "views/Upgrade/Upgrade";
@@ -28,6 +28,18 @@ const sideBarRoutes = [
     component: MarketplacesRoute
   },
   {
+    path: "/anuncios",
+    name: "Anúncios",
+    icon: "pe-7s-news-paper",
+    component: Ads
+  },
+  {
+    path: "/carteira",
+    name: "Carteira",
+    icon: "pe-7s-wallet",
+    component: MarketplacesRoute
+  },/*
+  {
     path: "/table",
     name: "Table List",
     icon: "pe-7s-note2",
@@ -46,7 +58,7 @@ const sideBarRoutes = [
     name: "Notificações",
     icon: "pe-7s-bell",
     component: Notifications
-  }, /*
+  }, 
   {
     upgrade: true,
     path: "/upgrade",

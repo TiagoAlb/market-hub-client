@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { HashRouter, Route, Switch } from "react-router-dom";
-import index from "routes/index.jsx";
+import app from "routes/app.jsx";
 import LoadingPage from  "./components/LoadingPage/LoadingPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/css/animate.min.css";
@@ -13,7 +13,7 @@ ReactDOM.render(
   <HashRouter>
     <Switch>
       {
-        sessionStorage.getItem("token") ? <LoadingPage/> : <Route path="/" name="Home" component={index}/>
+        sessionStorage.getItem("token") ? <LoadingPage/> : <Route path="/" name="Home" component={app}/>
       }
     </Switch>
   </HashRouter>,

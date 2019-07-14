@@ -35,12 +35,22 @@ class MarketplaceLogin extends Component {
             window.parent.location.href = "/#/marketplaces/login";
         } else {
             sessionStorage.removeItem("marketplace_authentication");
-            modalBody = <Iframe url="https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=3919471605726765"
+            if(this.props.cancelToken===true) {
+                sessionStorage.setItem("marketplace_authentication", JSON.stringify(
+                    {
+                        "status": "true", 
+                        "code": "cancelToken"
+                    }
+                ));
+                window.parent.location.href = "/#/marketplaces/login";
+            } else {
+                modalBody = <Iframe url="https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=3919471605726765"
                             id="marketplaceLogin"
                             width="100%"
                             height="100%"
                             frameBorder="0"  
                         />
+            }
         }
         return (
             <div>

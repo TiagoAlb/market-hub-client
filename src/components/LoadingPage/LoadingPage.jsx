@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import loginService from "../../services/LoginService.jsx";
-import Index from "../../routes/index.jsx";
+import app from "../../routes/app.jsx";
 import Route from "react-router-dom/es/Route";
 
 
@@ -16,7 +16,7 @@ class LoadingPage extends Component {
     loading() {
         loginService.validateLogin(() => {
             this.setState({
-                concluded: <Route path="/" name="Home" component={Index}/>
+                concluded: <Route path="/" name="Home" component={app}/>
             });
         });
     }

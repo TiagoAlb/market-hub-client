@@ -75,10 +75,11 @@ class Marketplaces extends Component {
     }
 
     linkMarketplace() {
+        window.location.href = "/#/marketplaces/link";
         this.CompanyService.linkMarketplace(this.props.profile.id, this.state.linkMarketplaceID,
             (success) => {
                 console.log(success);
-                window.location.reload();
+                window.location.href="/#/marketplaces";
                 //this.availableMarketplacesList();
             },(error) => {
                 console.log("Erro!");
@@ -157,7 +158,7 @@ class Marketplaces extends Component {
                     <Modal isOpen={this.state.modal} toggle={this.toggle}>
                         <ModalHeader toggle={this.toggle} style={modal_header_style}/>
                         <ModalBody style={modal_body_style}>
-                            <MarketplaceLogin idLogin={this.state.idLogin}/>
+                            <MarketplaceLogin idLogin={this.state.idLogin} cancelToken={false}/>
                         </ModalBody>
                     </Modal>
                 </Container>

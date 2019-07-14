@@ -8,7 +8,7 @@ import Login from 'views/Login/Login.jsx';
 import loginService from '../services/LoginService';
 
 
-class index extends Component {
+class app extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -107,4 +107,4 @@ class index extends Component {
     }
 }
 
-export default index;
+export default app;

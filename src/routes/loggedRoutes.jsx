@@ -3,7 +3,7 @@ import UserProfile from "views/UserProfile/UserProfile";
 import MarketplacesRoute from "views/Marketplaces/MarketplacesRoute";
 import TableList from "views/TableList/TableList";
 import Typography from "views/Typography/Typography";
-import Icons from "views/Icons/Icons";
+import Ads from "views/Ads/Ads";
 import Maps from "views/Maps/Maps";
 import Notifications from "views/Notifications/Notifications";
 import Upgrade from "views/Upgrade/Upgrade";
@@ -39,7 +39,7 @@ const loggedRoutes = [
     icon: "pe-7s-news-paper",
     component: Typography
   },
-  { path: "/icons", name: "Icons", icon: "pe-7s-science", component: Icons },
+  { path: "/Ads", name: "Anúncios", icon: "pe-7s-science", component: Ads },
   { path: "/maps", name: "Maps", icon: "pe-7s-map-marker", component: Maps },
   {
     path: "/notifications",

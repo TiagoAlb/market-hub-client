@@ -19,7 +19,6 @@ class LoginService {
                     this.data = data;
                     success(data);
                 })
-
             } else {
                 response.json().then(error);
             }
@@ -43,6 +42,7 @@ class LoginService {
             } else {
                 sessionStorage.removeItem("token");
                 console.log("error " + response.json().then());
+                window.location.href="/#/";
             }
         }).catch();
     }
