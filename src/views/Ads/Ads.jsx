@@ -49,10 +49,10 @@ class Icons extends Component {
                               <div>
                                 <Row style={{ float:"right", margin:"0", padding:"0" }}>
                                   <Col style={{ padding:"2" }}>
-                                    <MarketplaceAdsStatus avatar={MercadoLivre} status="success"/>
+                                    <MarketplaceAdsStatus id={"teste"+key} marketplaceName={"Mercado Livre"} avatar={MercadoLivre} status="success"/>
                                   </Col>
                                   <Col style={{ padding:"2" }}>
-                                    <MarketplaceAdsStatus avatar={Americanas} status="warning"/>
+                                    <MarketplaceAdsStatus id={"teste"+key} marketplaceName={"Americanas"} avatar={Americanas} status="warning"/>
                                   </Col>
                                 </Row>  
                             </div>

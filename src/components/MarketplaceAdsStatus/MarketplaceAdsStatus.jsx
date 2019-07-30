@@ -33,15 +33,15 @@ export class MarketplaceAdsStatus extends Component {
     return (
       <div>      
 
-        <Button id="Popover1" onMouseOver={this.toggle} onMouseOut={this.toggle} className="btn-simple" style={{ padding:0, margin:0, border:0 }} type="button">
+        <Button id={this.props.id} onMouseOver={this.toggle} onMouseOut={this.toggle} className="btn-simple" style={{ padding:0, margin:0, border:0 }} type="button">
           <div className="ads_status" style={{ borderColor:statusColor, backgroundColor:"red" }}>
           <img src={this.props.avatar}/>
           </div>
         </Button>
         
       
-        <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle}>
-          <PopoverHeader>Popover Title</PopoverHeader>
+        <Popover placement="bottom" isOpen={this.state.popoverOpen} target={this.props.id} toggle={this.toggle}>
+          <PopoverHeader style={{ backgroundColor:statusColor, marginTop:6 }}>{this.props.marketplaceName}</PopoverHeader>
           <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
         </Popover>
       </div>
