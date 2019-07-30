@@ -1,18 +1,21 @@
 import React, { Component } from "react";
-import { Grid, Row, Col } from "react-bootstrap";
-
-import Card from "components/Card/Card";
+import { Container, Row, Col, Popover, PopoverHeader, PopoverBody, Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle } from "reactstrap";
+import CardPage from "components/Card/Card";
 import { iconsArray } from "variables/Variables.jsx";
-import{ Ads } from "assets/img/ml.jpg";
+import Ads from "../../assets/img/ads.jpg";
+import MercadoLivre from "../../assets/img/ml_white.png";
+import Americanas from "../../assets/img/americanas.jpg";
+import MarketplaceAdsStatus from "components/MarketplaceAdsStatus/MarketplaceAdsStatus";
 
 class Icons extends Component {
   render() {
     return (
       <div className="content">
-        <Grid fluid>
+        <Container fluid>
           <Row>
             <Col md={12}>
-              <Card
+              <CardPage
                 title="202 Awesome Stroke Icons"
                 plain
                 ctAllIcons
@@ -33,19 +36,43 @@ class Icons extends Component {
                     {iconsArray.map((prop, key) => {
                       return (
                         <Col
-                          lg={2}
                           md={3}
-                          sm={4}
-                          xs={6}
                           className="font-icon-list"
                           key={key}
                         >
-                          
-                          <div className="font-icon-detail">
-                            <img src={Ads} width="120px" height="120px"/>
-            
-                            <input type="text" defaultValue={prop} />
-                          </div>
+                          <Card>
+                            <CardImg top width="100%" src={Ads} alt="Card image cap" />
+                            <CardBody>
+                              <CardTitle>Card title</CardTitle>
+                              <CardSubtitle>Card subtitle</CardSubtitle>
+                              <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                              <div>
+                                <Row style={{ float:"right", margin:"0", padding:"0" }}>
+                                  <Col style={{ padding:"2" }}>
+                                    <MarketplaceAdsStatus avatar={MercadoLivre} status="success"/>
+                                  </Col>
+                                  <Col style={{ padding:"2" }}>
+                                    <MarketplaceAdsStatus avatar={Americanas} status="warning"/>
+                                  </Col>
+                                </Row>  
+                            </div>
+                            </CardBody>
+                          </Card>
+                          {/* <div className="div_ads">
+                            <img src={Ads} width="100%" height="auto"/>
+                            <input type="text" defaultValue={"Anuncio Teste"} />
+                            <input type="text" defaultValue={"Descrição do anúncio teste contendo as informações do produto vendido."} />
+                            <div>
+                              <Row style={{ float:"right", margin:"0", padding:"0" }}>
+                                <Col style={{ padding:"2" }}>
+                                  <MarketplaceAdsStatus avatar={MercadoLivre} status="success"/>
+                                </Col>
+                                <Col style={{ padding:"2" }}>
+                                  <MarketplaceAdsStatus avatar={Americanas} status="warning"/>
+                                </Col>
+                              </Row>  
+                            </div>
+                          </div> */}
                         </Col>
                       );
                     })}
@@ -54,7 +81,7 @@ class Icons extends Component {
               />
             </Col>
           </Row>
-        </Grid>
+        </Container>
       </div>
     );
   }

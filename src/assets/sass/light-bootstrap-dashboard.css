@@ -1723,6 +1723,59 @@ body > .navbar-collapse[data-color="purple"]:after {
 .btn-group.select.open {
   overflow: visible; }
 
+.ads_status {
+  width: 30px;
+  height: 30px;
+  border: 3px solid;
+  border-radius: 100%;
+  overflow: hidden;
+  position: relative; }
+
+.ads_status img {
+  bottom: 0;
+  width: 100%;
+  height: 100%; }
+
+#Popover1 {
+  position: relative;
+  top: 1px;
+  background-color: transparent;
+  border: 0;
+  border-color: transparent;
+  text-decoration: none;
+  outline: 0;
+  outline-color: transparent; }
+
+#Popover1:active {
+  position: relative;
+  top: 1px;
+  background-color: transparent;
+  border: 0;
+  border-color: transparent;
+  text-decoration: none;
+  outline: 0;
+  outline-color: transparent; }
+
+#Popover1::after {
+  position: relative;
+  top: 1px;
+  background-color: transparent;
+  border: 0;
+  border-color: transparent;
+  text-decoration: none;
+  outline: 0;
+  outline-color: transparent; }
+
+#Popover1:hover {
+  position: relative;
+  top: 1px;
+  background-color: transparent;
+  border: 0;
+  border-color: transparent;
+  text-decoration: none;
+  outline: 0;
+  outline-color: transparent; }
+
 .card {
   box-shadow: #333;
   border-radius: 0;
