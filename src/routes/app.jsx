@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import notLoggedRoutes from './notLoggedRoutes';
-import loggedRoutes from './sideBarRoutes';
+import loggedRoutes from './loggedRoutes';
 import Header from '../components/Header/Header';
 import Sidebar from '../components/Sidebar/Sidebar';
 import Login from 'views/Login/Login.jsx';
@@ -12,7 +12,7 @@ class app extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            logged: loginService.logged()
+            logged: true//loginService.logged()
         };  
     }
 
@@ -48,16 +48,6 @@ class app extends Component {
                         <Header {...this.props}/>
                         <Switch> {
                             loggedRoutes.map((prop, key) => {
-                                if(prop.name === "Teste")
-                                return (
-                                    <Route
-                                            path={prop.path}
-                                            key={key}
-                                            render={(props) => <prop.component  {...props}
-                                                profile={loginService.logged()}/>}
-                                            profile={loginService.logged()}
-                                        />
-                                );
                                 if (prop.name === "Notifications")
                                 return (
                                     <Route
@@ -70,7 +60,7 @@ class app extends Component {
                                             />}
                                     />
                                 );
-                                if (prop.name === "Cadastro")
+                                if (prop.name === "Profile")
                                     return (
                                         <Route
                                             path={prop.path}
@@ -90,13 +80,23 @@ class app extends Component {
                                             profile={loginService.logged()}
                                             />
                                         );
-                                if (prop.redirect)
-                                    return (
-                                        <Redirect from={prop.path} to={prop.to} key={key}/>
-                                    );
-                                    return (
-                                        <Route path={prop.path} component={prop.component} key={key}/>
-                                    );
+                                    if (prop.name === "Anúncios")
+                                        return (
+                                            <Route
+                                                path={prop.path}
+                                                key={key}
+                                                render={(props) => <prop.component  {...props}
+                                                                                    profile={loginService.logged()}/>}
+                                                profile={loginService.logged()}
+                                                />
+                                            );
+                                    if (prop.redirect)
+                                        return (
+                                            <Redirect from={prop.path} to={prop.to} key={key}/>
+                                        );
+                                        return (
+                                            <Route path={prop.path} component={prop.component} key={key}/>
+                                        );
                             })
                         }
                         </Switch>

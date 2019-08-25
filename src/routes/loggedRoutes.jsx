@@ -17,7 +17,7 @@ const loggedRoutes = [
   },
   {
     path: "/user",
-    name: "Cadastro",
+    name: "Profile",
     icon: "pe-7s-user",
     component: UserProfile
   },
@@ -39,7 +39,7 @@ const loggedRoutes = [
     icon: "pe-7s-news-paper",
     component: Typography
   },
-  { path: "/Ads", name: "Anúncios", icon: "pe-7s-science", component: Ads },
+  { path: "/anuncios", name: "Anúncios", icon: "pe-7s-science", component: Ads },
   { path: "/maps", name: "Maps", icon: "pe-7s-map-marker", component: Maps },
   {
     path: "/notifications",

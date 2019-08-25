@@ -1724,8 +1724,8 @@ body > .navbar-collapse[data-color="purple"]:after {
   overflow: visible; }
 
 .ads_status {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border: 3px solid;
   border-radius: 100%;
   overflow: hidden;
@@ -1899,6 +1899,14 @@ body > .navbar-collapse[data-color="purple"]:after {
   .card-plain .form-control {
     background-color: white;
     border: none; }
+
+.card-ads-title {
+  font-weight: bold; }
+
+.card-ads-text {
+  text-align: justify;
+  font-size: 14px;
+  max-width: 10in; }
 
 .card-image .cardMiddle {
   margin-top: 40px;

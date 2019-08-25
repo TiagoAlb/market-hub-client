@@ -554,3 +554,63 @@
     width: 100%;
     height: 100%;
 }
+.ads_card_options, .ads_card_options_buttons {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    right: 0;
+    margin-right: 4%;
+    top: 0;
+    padding: 0;
+    margin-top: 0;
+    width: 90px;
+    height: 30px;
+}
+.ads_card_options {
+    background-color: #FFFFFF;
+    opacity: 0.85;
+}
+.ads_card_options_buttons i { 
+    text-align: center;
+    font-size: 1.5em; 
+    cursor: hand;
+}
+
+.ads_card_options_buttons i:hover { 
+    font-size: 1.8em; 
+}
+
+@media only screen and (max-width: 760px) {
+    .ads_card_options_buttons i { font-size: 3em; }
+    .ads_card_options, .ads_card_options_buttons { width: 200px; height: 60px; }
+    .ads_card_options_buttons i:hover { 
+        cursor: hand; 
+        font-size: 3.3em; 
+        color: #FF8800;
+    }
+}/*
+@media only screen and (min-width: 480px) {
+    .ads_card_options_buttons i { font-size: 3em; }
+}
+@media only screen and (min-width: 580px) {
+    .ads_card_options_buttons i { font-size: 3em; }
+}
+@media only screen and (min-width: 720px) {
+    .ads_card_options_buttons i { font-size: 0.4em; }
+}
+@media only screen and (min-width: 840px) {
+    .ads_card_options_buttons i { font-size: 0.8em; }
+}
+@media only screen and (min-width: 960px) {
+    .ads_card_options_buttons i { font-size: 1.2em; }
+}
+@media only screen and (min-width: 1000px) {
+    .ads_card_options_buttons i { font-size: 1.5em; }
+}
+@media only screen and (min-width: 1440px) {
+    .ads_card_options_buttons i { font-size: 2em; }
+}*/
