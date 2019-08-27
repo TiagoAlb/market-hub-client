@@ -266,7 +266,7 @@ const iconsArray = [
   "pe-7s-album",
   "pe-7s-arc",
   "pe-7s-back-2",
-  "pe-7s-bandaid",
+  /*"pe-7s-bandaid",
   "pe-7s-car",
   "pe-7s-diamond",
   "pe-7s-door-lock",
@@ -448,7 +448,7 @@ const iconsArray = [
   "pe-7s-check",
   "pe-7s-chat",
   "pe-7s-cart",
-  "pe-7s-camera",
+  "pe-7s-camera",*/
   "pe-7s-call",
   "pe-7s-calculator",
   "pe-7s-browser",

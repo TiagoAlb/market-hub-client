@@ -584,7 +584,17 @@
     font-size: 1.8em; 
 }
 
-@media only screen and (max-width: 760px) {
+.category_type {
+    font-style: normal;
+}
+
+.category_type div:hover {
+    -webkit-box-shadow: 0px 11px 16px 1px rgba(163, 163, 163, 0.5);
+    -moz-box-shadow:    0px 11px 16px 1px rgba(163, 163, 163, 0.5);
+    box-shadow:         0px 11px 16px 1px rgba(163, 163, 163, 0.5);
+}
+
+@media only screen and (max-width: 575px) {
     .ads_card_options_buttons i { font-size: 3em; }
     .ads_card_options, .ads_card_options_buttons { width: 200px; height: 60px; }
     .ads_card_options_buttons i:hover { 

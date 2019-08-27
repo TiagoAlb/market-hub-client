@@ -1,19 +1,12 @@
 import React, { Component } from "react";
-import ImageCard from "../../components/ImageCard/ImageCard";
-import Logo from "../../assets/img/ml.jpg";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Screen from "Useful/Screen.jsx";
 import MarketplaceService from "../../services/MarketplaceServices/MarketplaceService";
 import CompanyService from "../../services/CompanyServices/CompanyService.jsx";
-import InfiniteScroll from "react-infinite-scroll-component";
 import MarketplaceLogin from './MarketplaceLogin';
 import MarketplacesList from "./MarketplacesList";
-import { Container, Row, Col, 
-         Form, FormGroup, Label, 
-         Input, FormText, Alert,
-         Button, Modal, ModalHeader, 
-         ModalBody, ModalFooter } from "reactstrap";
-import loginService from "../../services/LoginService";
+import { Container, Row, Col, FormGroup, Label, 
+         Input, Modal, ModalHeader, ModalBody } from "reactstrap";
 
 const modal_header_style = {
     backgroundColor: "transparent", 
