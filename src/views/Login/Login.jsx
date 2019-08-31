@@ -4,7 +4,7 @@ import Card from "../../components/Card/Card.jsx";
 import {Link} from 'react-router-dom';
 import Logo from '../../assets/img/logo.png';
 import Google from '../../assets/img/g_google_logo.png';
-import loginService from '../../services/LoginService'
+import loginService from '../../services/LoginService.jsx'
 import {
     Container, Col, Row, Form,
     FormGroup, Label, Input

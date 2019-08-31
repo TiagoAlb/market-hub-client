@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
-import notLoggedRoutes from './notLoggedRoutes';
-import loggedRoutes from './loggedRoutes';
-import Header from '../components/Header/Header';
-import Sidebar from '../components/Sidebar/Sidebar';
-import Login from 'views/Login/Login.jsx';
-import loginService from '../services/LoginService';
+import notLoggedRoutes from './notLoggedRoutes.jsx';
+import loggedRoutes from './loggedRoutes.jsx';
+import Header from '../components/Header/Header.jsx';
+import Sidebar from '../components/Sidebar/Sidebar.jsx';
+import Login from '../views/Login/Login.jsx';
+import loginService from '../services/LoginService.jsx';
 
 
 class app extends Component {
@@ -13,7 +13,7 @@ class app extends Component {
         super(props);
         this.state = {
             logged: true//loginService.logged()
-        };  
+        };
     }
 
     render() {
@@ -37,7 +37,7 @@ class app extends Component {
                         />
                     );
                 })
-            }           
+            }
             </Switch>
             );
         } else {

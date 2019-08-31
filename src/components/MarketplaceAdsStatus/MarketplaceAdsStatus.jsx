@@ -8,12 +8,12 @@ const button_style = {
   cursor:"pointer",
   overflow: "hidden",
   outline:"none",
-  padding:0, 
-  margin:0, 
+  padding:0,
+  margin:0,
   borderRadius:"100%"
 }
 
-export class MarketplaceAdsStatus extends Component {
+class MarketplaceAdsStatus extends Component {
   constructor(props) {
     super(props);
 
@@ -41,9 +41,9 @@ export class MarketplaceAdsStatus extends Component {
       else if(this.props.status==="danger")
         statusColor="#FF4444";
     }
-    
+
     return (
-      <div>      
+      <div>
         <Button id={this.props.id} onMouseOver={this.toggle} onMouseOut={this.toggle} className="btn-link" style={button_style} type="button">
           <div className="ads_status" style={{ borderColor:statusColor }}>
             <img src={this.props.avatar}/>

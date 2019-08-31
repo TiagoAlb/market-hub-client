@@ -1,4 +1,4 @@
-import loginService from "./LoginService";
+import loginService from "./LoginService.jsx";
 
 export default class RestService {
 

@@ -1,23 +1,20 @@
 import React, { Component } from "react";
 import {
-  Grid,
-  Row,
-  Col,
   FormGroup,
   ControlLabel,
   FormControl
 } from "react-bootstrap";
 import {
-  Input, Label
+  Input, Label, Grid, Row, Col, Container
 } from 'reactstrap';
-import { Card } from "components/Card/Card.jsx";
-import InputFile from "../../components/InputFile/InputFile";
+import { Card } from "../../components/Card/Card.jsx";
+import InputFile from "../../components/InputFile/InputFile.jsx";
 import Upload from "../../assets/img/upload.png";
-import { FormInputs } from "components/FormInputs/FormInputs.jsx";
-import { UserCard } from "components/UserCard/UserCard.jsx";
-import Button from "components/CustomButton/CustomButton.jsx";
-import loginService from "../../services/LoginService";
-import avatar from "assets/img/faces/face-3.jpg";
+import { FormInputs } from "../../components/FormInputs/FormInputs.jsx";
+import { UserCard } from "../../components/UserCard/UserCard.jsx";
+import Button from "../../components/CustomButton/CustomButton.jsx";
+import loginService from "../../services/LoginService.jsx";
+import avatar from "../../assets/img/faces/face-3.jpg";
 
 class UserProfile extends Component {
 
@@ -38,7 +35,7 @@ class UserProfile extends Component {
   render() {
     return (
       <div className="content">
-        <Grid fluid>
+        <Container fluid>
           <Row>
             <Col md={8}>
               <Card
@@ -59,7 +56,7 @@ class UserProfile extends Component {
                         }}
                       />
                     </FormGroup>
-                  </Col> 
+                  </Col>
                   <Col md={6}>
                     <FormGroup>
                       <Label>Nome Fantasia</Label>
@@ -72,7 +69,7 @@ class UserProfile extends Component {
                         }}
                       />
                     </FormGroup>
-                  </Col>  
+                  </Col>
                   </Row>
                     <FormInputs
                       ncols={["col-md-12"]}
@@ -164,7 +161,7 @@ class UserProfile extends Component {
               />
             </Col>
           </Row>
-        </Grid>
+        </Container>
       </div>
     );
   }

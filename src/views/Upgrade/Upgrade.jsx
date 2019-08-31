@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { Table, Grid, Row, Col } from "react-bootstrap";
-
-import Card from "components/Card/Card";
-
-import Button from "components/CustomButton/CustomButton";
+import Card from "../../components/Card/Card.jsx";
+import Button from "../../components/CustomButton/CustomButton.jsx";
 
 class Icons extends Component {
   render() {

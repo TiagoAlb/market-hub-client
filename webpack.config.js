@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+
 module.exports = {
   stats: {
     children: false
@@ -18,6 +19,15 @@ module.exports = {
           {
             loader: "html-loader"
           }
+        ]
+      },
+      {
+        test: /\.(scss|sass|css)$/i,
+        use: [
+            { loader: 'css-loader' }, 'postcss-loader',
+          /*  { loader: 'postcss-loader', options: { sourceMap: true } },*/
+            { loader: 'resolve-url-loader' },
+            { loader: 'sass-loader', options: { sourceMap: true } }
         ]
       }
     ]

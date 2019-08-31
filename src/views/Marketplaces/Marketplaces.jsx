@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import CustomButton from "../../components/CustomButton/CustomButton";
-import Screen from "Useful/Screen.jsx";
-import MarketplaceService from "../../services/MarketplaceServices/MarketplaceService";
+import CustomButton from "../../components/CustomButton/CustomButton.jsx";
+import Screen from "../../Useful/Screen.jsx";
+import MarketplaceService from "../../services/MarketplaceServices/MarketplaceService.jsx";
 import CompanyService from "../../services/CompanyServices/CompanyService.jsx";
-import MarketplaceLogin from './MarketplaceLogin';
-import MarketplacesList from "./MarketplacesList";
+import MarketplaceLogin from './MarketplaceLogin.jsx';
+import MarketplacesList from "./MarketplacesList.jsx";
 import { Container, Row, Col, FormGroup, Label, 
          Input, Modal, ModalHeader, ModalBody } from "reactstrap";
 

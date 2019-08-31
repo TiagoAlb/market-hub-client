@@ -1,5 +1,5 @@
 import RestService from '../RestService.jsx';
-import loginService from "../LoginService";
+import loginService from "../LoginService.jsx";
 
 export default class CompanyService extends RestService {
     constructor(){

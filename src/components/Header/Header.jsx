@@ -2,8 +2,8 @@ import React, { Component } from "react";
 //import { Navbar } from "react-bootstrap";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import HeaderLinks from "./HeaderLinks.jsx";
-import loggedRoutes from "routes/loggedRoutes.jsx";
-import Screen from "Useful/Screen.jsx";
+import loggedRoutes from "../../routes/loggedRoutes.jsx";
+import Screen from "../../Useful/Screen.jsx";
 
 class Header extends Component {
   constructor(props) {

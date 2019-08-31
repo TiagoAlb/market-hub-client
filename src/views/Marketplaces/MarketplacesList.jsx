@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import ImageCard from "../../components/ImageCard/ImageCard";
+import ImageCard from "../../components/ImageCard/ImageCard.jsx";
 import Logo from "../../assets/img/ml.jpg";
-import CustomButton from "../../components/CustomButton/CustomButton";
-import Screen from "Useful/Screen.jsx";
-import MarketplaceService from "../../services/MarketplaceServices/MarketplaceService";
+import CustomButton from "../../components/CustomButton/CustomButton.jsx";
+import Screen from "../../Useful/Screen.jsx";
+import MarketplaceService from "../../services/MarketplaceServices/MarketplaceService.jsx";
 import CompanyService from "../../services/CompanyServices/CompanyService.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Container, Row, Col, 

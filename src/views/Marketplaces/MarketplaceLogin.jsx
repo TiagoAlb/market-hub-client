@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MarketplaceService from "../../services/MarketplaceServices/MarketplaceService";
+import MarketplaceService from "../../services/MarketplaceServices/MarketplaceService.jsx";
 import Iframe from 'react-iframe';
 import { Container, Row, Col, 
     Form, FormGroup, Label, 

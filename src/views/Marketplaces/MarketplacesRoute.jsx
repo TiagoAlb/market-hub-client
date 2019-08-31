@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Route, Switch} from 'react-router-dom';
-import MarketplaceLogin from './MarketplaceLogin';
-import Marketplaces from "./Marketplaces";
+import MarketplaceLogin from './MarketplaceLogin.jsx';
+import Marketplaces from "./Marketplaces.jsx";
 
 class MarketplacesPageRoute extends Component {
     render() {

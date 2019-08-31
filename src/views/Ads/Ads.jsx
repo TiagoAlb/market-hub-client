@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Card, CardImg, CardText, CardBody,
   CardTitle, Tooltip, Modal, ModalHeader, ModalBody } from "reactstrap";
-import Button from "../../components/CustomButton/CustomButton";
-import { iconsArray } from "variables/Variables.jsx";
+import Button from "../../components/CustomButton/CustomButton.jsx";
+import { iconsArray } from "../../variables/Variables.jsx";
 import AdsImage from "../../assets/img/ads.jpg";
 import MercadoLivre from "../../assets/img/ml_white.png";
 import Americanas from "../../assets/img/americanas.jpg";
-import AdsCreate from "./AdsCreate";
+import AdsCreate from "./AdsCreate.jsx";
 import "material-design-icons-iconfont";
-import MarketplaceAdsStatus from "components/MarketplaceAdsStatus/MarketplaceAdsStatus";
+import MarketplaceAdsStatus from "../../components/MarketplaceAdsStatus/MarketplaceAdsStatus.jsx";
 
 const buttons_ads = [
   {
@@ -67,9 +67,9 @@ class Ads extends Component {
         <Container fluid>
           <Row>
             <Col md={12}>
-              <Button title="Adicionar anúncio" 
-                style={{ textAlign: "center", display: "flex" }} 
-                fill pullRight 
+              <Button title="Adicionar anúncio"
+                style={{ textAlign: "center", display: "flex" }}
+                fill pullRight
                 color="success"
                 onClick={this.toggle}>
                 <i class="material-icons">post_add</i>
@@ -114,7 +114,7 @@ class Ads extends Component {
                               <Col style={{ padding:"2" }}>
                                 <MarketplaceAdsStatus id={"ads_status_2_"+card_key} marketplaceName={"Americanas"} avatar={Americanas} status="warning"/>
                               </Col>
-                            </Row>  
+                            </Row>
                           </div>
                         </CardBody>
                       </Card>

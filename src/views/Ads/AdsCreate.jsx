@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Card, CardFooter, CardImg, CardText, CardBody,
     CardTitle, Tooltip, Modal, ModalHeader, ModalBody } from "reactstrap";
+import AdsCreateForm from "./AdsCreateForm.jsx";
 import ReactDOM from "react-dom";
 import "material-design-icons-iconfont";
 
@@ -83,9 +84,9 @@ class AdsCreate extends Component {
             );
         } else {
             return(
-                <div>
-                    Aqui
-                </div>
+                <Container fluid>
+                    <AdsCreateForm/>
+                </Container>
             );
         }
     }

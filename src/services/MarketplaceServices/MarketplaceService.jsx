@@ -1,5 +1,5 @@
-import RestService from "../RestService";
-import loginService from "../LoginService";
+import RestService from "../RestService.jsx";
+import loginService from "../LoginService.jsx";
 
 export default class MarketplaceService extends RestService {
     constructor(){
