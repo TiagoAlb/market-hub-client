@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Popover, PopoverHeader, PopoverBody } from "reactstrap";
+import { Button, Popover, PopoverBody, PopoverHeader } from "reactstrap";
 
 const button_style = {
   backgroundColor: "transparent",

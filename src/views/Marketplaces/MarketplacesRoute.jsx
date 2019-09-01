@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import {Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import MarketplaceLogin from './MarketplaceLogin.jsx';
 import Marketplaces from "./Marketplaces.jsx";
 
 class MarketplacesPageRoute extends Component {
     render() {
-        return <Marketplaces profile={this.props.profile}/>
+        return <Marketplaces profile={this.props.profile} />
     }
 }
 
 class LoginRoute extends Component {
     render() {
-        return <MarketplaceLogin profile={this.props.profile}/>
+        return <MarketplaceLogin profile={this.props.profile} />
     }
 }
 export default class MarketplacesRoute extends Component {

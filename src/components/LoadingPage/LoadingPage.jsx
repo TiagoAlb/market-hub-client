@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import loginService from "../../services/LoginService.jsx";
-import app from "../../routes/app.jsx";
+import React, { Component } from 'react';
 import Route from "react-router-dom/es/Route";
+import app from "../../routes/app.jsx";
+import loginService from "../../services/LoginService.jsx";
 
 
 class LoadingPage extends Component {

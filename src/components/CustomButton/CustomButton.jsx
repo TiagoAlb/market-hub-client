@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Button } from "reactstrap";
 import cx from "classnames";
 import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { Button } from "reactstrap";
 
 class CustomButton extends Component {
   render() {

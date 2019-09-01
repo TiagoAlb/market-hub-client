@@ -1,37 +1,9 @@
-import React, { Component } from "react";
-import { Container, Row, Col, Card, CardFooter, CardImg, CardText, CardBody,
-    CardTitle, Tooltip, Modal, ModalHeader, ModalBody } from "reactstrap";
-import AdsCreateForm from "./AdsCreateForm.jsx";
-import ReactDOM from "react-dom";
 import "material-design-icons-iconfont";
-
-const ads_categoty = [
-    {
-        id: "ctg_1",
-        name: "Produtos",
-        icon: "camera_alt",
-        color: ""
-    },
-    {
-        id: "ctg_2",
-        name: "Veículos",
-        icon: "directions_car",
-        color: ""
-    },
-    {
-        id: "ctg_3",
-        name: "Imóveis",
-        icon: "apartment",
-        color: ""
-    },
-    {
-        id: "ctg_4",
-        name: "Serviços",
-        icon: "room_service",
-        color: ""
-    }
-];
-
+import React, { Component } from "react";
+import { Container, ModalFooter } from "reactstrap";
+import Button from "../../components/CustomButton/CustomButton.jsx";
+import AdsForm from "./AdsForm";
+import AdsService from "../../services/AdsServices/AdsService.jsx";
 
 class AdsCreate extends Component {
     constructor(props) {
@@ -39,82 +11,99 @@ class AdsCreate extends Component {
 
         this.state = {
             step: 0,
-            category_id: ''
+            category_id: '',
+            ads: {
+                title: "",
+                category_id: "",
+                price: 0,
+                condition: "new",
+                available_quantity: 1,
+                video_id: "",
+                description: ""
+            },
+            category_list: {
+                id: "",
+                name: ""
+            }
         }
-        this.nextStep = this.nextStep.bind(this);
+        this.incrementStep = this.incrementStep.bind(this);
+        this.decrementStep = this.decrementStep.bind(this);
+        this.setAdsValues = this.setAdsValues.bind(this);
+        this.AdsService = new AdsService();
     }
 
-    nextStep(id) {
+    categorySearch(title) {
+        let search = {
+            title: title,
+            category_from: "",
+            price: "",
+            seller_id: ""
+        }
+        this.AdsService.categorySearch(search,
+            (success) => {
+                this.setState({
+                    category_list: success.path_from_root
+                });
+            }, (error) => {
+                console.log("Erro!");
+                console.log(error);
+            }
+        )
+    }
+
+    setAdsValues(attribute, value) {
+        this.setState(
+            (state) => state.ads[attribute] = value
+        );
+
+        if(attribute==="title")
+            this.categorySearch(value);
+    }
+
+    incrementStep() {
         this.setState({
-            step: this.state.step+1,
-            category_id: id
+            step: this.state.step + 1
         });
     }
 
-    render() {
-        console.log(this.state.step);
-        if(this.state.step<1) {
-            return(
-                <div>
-                    <Container fluid>
-                        <Row>
-                            <Col md={12}>
-                                <div>
-                                    <h4 style={{ marginTop: "0" }}>O que você deseja publicar?</h4>
-                                    <Row>
-                                        {ads_categoty.map((prop, key) => {
-                                            return (
-                                                <Col
-                                                md={6}
-                                                sm={4}
-                                                key={key}
-                                                >
-                                                    <a className="category_type" onClick={() => this.nextStep(prop.id)}>
-                                                        <CategoryType name={prop.name} color={prop.name} icon={prop.icon}/>
-                                                    </a>
-                                                </Col>
-                                            );
-                                        })}
-                                    </Row>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Container>
-                </div>
-            );
-        } else {
-            return(
-                <Container fluid>
-                    <AdsCreateForm/>
-                </Container>
-            );
-        }
+    decrementStep() {
+        this.setState({
+            step: this.state.step - 1
+        });
     }
-}
 
-class CategoryType extends Component {
+    handleStepCategory = (categoryId) => {
+        this.setState({ category_id: categoryId, step: this.state.step + 1 });
+    }
+
     render() {
         return (
-            <div>
-                <Card style={{ textAlign: "center", cursor: "hand" }}>
-                    <CardBody style={{ padding: "0" }}>
-                        <CardText>
-                            <i class="material-icons" style={{ padding: "20 0 0 0", fontSize: "48" }} color={this.props.color}>{this.props.icon}</i>
-                        </CardText>
-                        <CardFooter>{this.props.name}</CardFooter>
-                    </CardBody>
-                </Card>
-           </div>
-        );
-    }
-}
-
-class Questions extends Component {
-    render() {
-        return (
-            <div>
-                Aqui
-           </div>
+            <Container fluid>
+                <br/>
+                <AdsForm
+                    step={this.state.step}
+                    onSelectCategory={this.handleStepCategory}
+                    setAdsValues={this.setAdsValues}
+                    ads={this.state.ads}
+                    category_list={this.state.category_list}
+                />
+                {this.state.step > 0 ?
+                    <ModalFooter>
+                        <div style={{ width: "100%" }}>
+                            <Button onClick={this.decrementStep}>
+                                Voltar
+                            </Button>
+                            <Button onClick={this.incrementStep}
+                                fill pullRight
+                                color="primary">
+                                Próximo
+                            </Button>
+                        </div>
+                    </ModalFooter>
+                :
+                    ""
+                }
+            </Container>
         );
     }
 }

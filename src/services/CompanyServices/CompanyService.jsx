@@ -23,7 +23,6 @@ export default class CompanyService extends RestService {
     }
     
     consultarEmail(email, sucesso, erro) {
-
         let trataFetch = (resultado) => {
             if (resultado.ok) {
                 resultado.json().then(sucesso)

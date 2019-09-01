@@ -1,12 +1,7 @@
-import Dashboard from "../views/Dashboard/Dashboard.jsx";
-import UserProfile from "../views/UserProfile/UserProfile.jsx";
-import MarketplacesRoute from "../views/Marketplaces/MarketplacesRoute.jsx";
-import TableList from "../views/TableList/TableList.jsx";
-import Typography from "../views/Typography/Typography.jsx";
 import Ads from "../views/Ads/Ads.jsx";
-import Maps from "../views/Maps/Maps.jsx";
-import Notifications from "../views/Notifications/Notifications.jsx";
-import Upgrade from "../views/Upgrade/Upgrade.jsx";
+import Dashboard from "../views/Dashboard/Dashboard.jsx";
+import MarketplacesRoute from "../views/Marketplaces/MarketplacesRoute.jsx";
+import UserProfile from "../views/UserProfile/UserProfile.jsx";
 
 const sideBarRoutes = [
   {

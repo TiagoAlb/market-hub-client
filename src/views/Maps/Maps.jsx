@@ -1,11 +1,6 @@
 import React from "react";
 // react components used to create a google map
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker
-} from "react-google-maps";
+import { GoogleMap, Marker, withGoogleMap, withScriptjs } from "react-google-maps";
 
 const CustomMap = withScriptjs(
   withGoogleMap(props => (

@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import CustomButtom from "../../components/CustomButton/CustomButton.jsx";
-import Card from "../../components/Card/Card.jsx";
-import {Link} from 'react-router-dom';
-import Logo from '../../assets/img/logo.png';
+import { Link } from 'react-router-dom';
+import { Col, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 import Google from '../../assets/img/g_google_logo.png';
-import loginService from '../../services/LoginService.jsx'
-import {
-    Container, Col, Row, Form,
-    FormGroup, Label, Input
-} from 'reactstrap';
+import Logo from '../../assets/img/logo.png';
+import Card from "../../components/Card/Card.jsx";
+import CustomButtom from "../../components/CustomButton/CustomButton.jsx";
+import loginService from '../../services/LoginService.jsx';
 
 class Login extends Component {
     constructor(props) {

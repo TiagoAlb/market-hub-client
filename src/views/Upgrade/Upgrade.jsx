@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Grid, Row, Col } from "react-bootstrap";
+import { Col, Grid, Row, Table } from "react-bootstrap";
 import Card from "../../components/Card/Card.jsx";
 import Button from "../../components/CustomButton/CustomButton.jsx";
 

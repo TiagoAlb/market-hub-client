@@ -1,34 +1,27 @@
 import React, { Component } from "react";
-import {
-  FormGroup,
-  ControlLabel,
-  FormControl
-} from "react-bootstrap";
-import {
-  Input, Label, Grid, Row, Col, Container
-} from 'reactstrap';
-import { Card } from "../../components/Card/Card.jsx";
-import InputFile from "../../components/InputFile/InputFile.jsx";
+import { ControlLabel, FormControl, FormGroup } from "react-bootstrap";
+import { Col, Container, Input, Label, Row } from 'reactstrap';
 import Upload from "../../assets/img/upload.png";
-import { FormInputs } from "../../components/FormInputs/FormInputs.jsx";
-import { UserCard } from "../../components/UserCard/UserCard.jsx";
+import { Card } from "../../components/Card/Card.jsx";
 import Button from "../../components/CustomButton/CustomButton.jsx";
+import { FormInputs } from "../../components/FormInputs/FormInputs.jsx";
+import InputFile from "../../components/InputFile/InputFile.jsx";
+import { UserCard } from "../../components/UserCard/UserCard.jsx";
 import loginService from "../../services/LoginService.jsx";
-import avatar from "../../assets/img/faces/face-3.jpg";
 
 class UserProfile extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-        avatar: `/api/profiles/` + this.props.profile.id + `/image?` + loginService.getAuthorizationGet(),
-        profile: this.props.profile
+      avatar: `/api/profiles/` + this.props.profile.id + `/image?` + loginService.getAuthorizationGet(),
+      profile: this.props.profile
     };
   }
 
   setProfileValues(attribute, value) {
     this.setState(
-        (estado) => estado.profile[attribute] = value
+      (estado) => estado.profile[attribute] = value
     );
   }
 
@@ -43,34 +36,34 @@ class UserProfile extends Component {
                 content={
                   <form>
                     <Row>
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label>CNPJ / CPF</Label>
-                      <Input
-                        type="text"
-                        value={this.state.profile.cnpjCpf}
-                        disabled
-                        onChange={(e) => {
-                          e.preventDefault();
-                          this.setProfileValues("name", e.target.value);
-                        }}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label>Nome Fantasia</Label>
-                      <Input
-                        type="text"
-                        value={this.state.profile.name}
-                        onChange={(e) => {
-                          e.preventDefault();
-                          this.setProfileValues("name", e.target.value);
-                        }}
-                      />
-                    </FormGroup>
-                  </Col>
-                  </Row>
+                      <Col md={6}>
+                        <FormGroup>
+                          <Label>CNPJ / CPF</Label>
+                          <Input
+                            type="text"
+                            value={this.state.profile.cnpjCpf}
+                            disabled
+                            onChange={(e) => {
+                              e.preventDefault();
+                              this.setProfileValues("name", e.target.value);
+                            }}
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col md={6}>
+                        <FormGroup>
+                          <Label>Nome Fantasia</Label>
+                          <Input
+                            type="text"
+                            value={this.state.profile.name}
+                            onChange={(e) => {
+                              e.preventDefault();
+                              this.setProfileValues("name", e.target.value);
+                            }}
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
                     <FormInputs
                       ncols={["col-md-12"]}
                       proprieties={[
