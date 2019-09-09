@@ -2,7 +2,7 @@ import "material-design-icons-iconfont";
 import React, { Component } from "react";
 import {
   Card, CardBody, CardImg, CardText, CardTitle, Col, Container, Modal,
-  ModalBody, ModalHeader, ModalFooter, Row, Tooltip
+  ModalBody, ModalHeader, Row, Tooltip
 } from "reactstrap";
 import AdsImage from "../../assets/img/ads.jpg";
 import Americanas from "../../assets/img/americanas.jpg";
@@ -32,10 +32,6 @@ const buttons_ads = [
     name: 'Excluir'
   }
 ];
-
-const modal_header_style = {
-  border: "0"
-}
 
 class Ads extends Component {
   constructor(props) {

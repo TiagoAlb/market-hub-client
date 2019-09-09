@@ -22,9 +22,6 @@ class Sidebar extends Component {
     window.addEventListener("resize", this.updateDimensions.bind(this));
   }
   render() {
-    const sidebarBackground = {
-      backgroundImage: "url(" + imagine + ")"
-    };
     const sidebarBackgroundColor = {
       backgroundColor: "#2D2D34"
     };

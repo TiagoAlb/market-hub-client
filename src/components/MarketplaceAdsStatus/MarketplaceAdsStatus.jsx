@@ -46,7 +46,7 @@ class MarketplaceAdsStatus extends Component {
       <div>
         <Button id={this.props.id} onMouseOver={this.toggle} onMouseOut={this.toggle} className="btn-link" style={button_style} type="button">
           <div className="ads_status" style={{ borderColor:statusColor }}>
-            <img src={this.props.avatar}/>
+            <img alt="auto" src={this.props.avatar}/>
           </div>
         </Button>
         <Popover placement="bottom" isOpen={this.state.popoverOpen} target={this.props.id}>

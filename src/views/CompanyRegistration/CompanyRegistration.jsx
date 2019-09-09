@@ -109,19 +109,21 @@ class CompanyRegistration extends Component {
     _handleImageChange(e) {
         e.preventDefault();
         let reader = new FileReader();
-        let file = e.target.files[0];
+        let fileData = e.target.files[0];
         let data = new FormData();
         data.append('file', e.target.files[0]);
         data.append('name', 'profile_avatar');
         data.append('description', 'Image profile');
         this.setValues("file", data);
 
-        if (this.validateImage(file)) {
+        if (this.validateImage(fileData)) {
             reader.onloadend = () => {
-                file = file;
+                this.setState({
+                    file: fileData
+                });
                 this.setValues("image", reader.result);
             };
-            reader.readAsDataURL(file)
+            reader.readAsDataURL(fileData)
         }
     }
 

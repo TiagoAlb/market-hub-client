@@ -18,7 +18,7 @@ export class InputFile extends Component {
                 }
             ]}
             />
-            <img src={this.props.image}/>
+            <img alt="auto" src={this.props.image}/>
             <span style={{padding: 'auto' }}>{this.props.text}</span>
         </div>
       </div>

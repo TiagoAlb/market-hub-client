@@ -39,7 +39,7 @@ class Marketplaces extends Component {
         this.toggle = this.toggle.bind(this);
     }
 
-    componentDidMount() {
+    UNSAFE_componentWillMount() {
         Screen.updateDimensions();
         window.addEventListener("resize", Screen.updateDimensions.bind(this));
     }

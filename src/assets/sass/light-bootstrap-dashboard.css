@@ -744,6 +744,19 @@ body > .navbar-collapse[data-color="purple"]:after {
   margin-top: -1px;
   right: 8px; }
 
+#row_list_item {
+  border-bottom: 1px solid #cecece; }
+
+#row_list_item {
+  padding: 15 0 15 0; }
+
+#row_list_item i {
+  color: #b1b1b1; }
+
+#row_list_item:hover {
+  background-color: #FAFAFA;
+  cursor: hand; }
+
 .form-control::-moz-placeholder {
   color: #DDDDDD;
   opacity: 1;

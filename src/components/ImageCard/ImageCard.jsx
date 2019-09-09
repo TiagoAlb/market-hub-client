@@ -20,6 +20,7 @@ export class ImageCard extends Component {
             <Col md={2}>
               <div className="cardImage">
                 <img
+                  alt="auto"
                   src={this.props.avatar}
                 />
               </div>
