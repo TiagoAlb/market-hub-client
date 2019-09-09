@@ -99,7 +99,6 @@ class AdsCreate extends Component {
         this.setState(
             (state) => state.ads[attribute] = value
         );
-
         if(attribute==='title')
             this.categoryNavSearch(value, '');
     }
