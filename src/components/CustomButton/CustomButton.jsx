@@ -39,7 +39,6 @@ CustomButton.propTypes = {
     ]))
   ]),
 
-  // ref will only get you a reference to the Button component, use innerRef to get a reference to the DOM element (for things like focus management).
   innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]),
 
   onClick: PropTypes.func,
@@ -47,8 +46,6 @@ CustomButton.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   cssModule: PropTypes.object,
-
-  // use close prop for BS4 close icon utility
   close: PropTypes.bool,
 }
 
