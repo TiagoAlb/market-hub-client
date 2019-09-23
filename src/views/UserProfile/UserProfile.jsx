@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ControlLabel, FormControl, FormGroup } from "react-bootstrap";
+import { ControlLabel, FormControl, FormGroup, Form } from "react-bootstrap";
 import { Col, Container, Input, Label, Row } from 'reactstrap';
 import Upload from "../../assets/img/upload.png";
 import { Card } from "../../components/Card/Card.jsx";
@@ -34,7 +34,7 @@ class UserProfile extends Component {
               <Card
                 title="Editar Cadastro"
                 content={
-                  <form>
+                  <Form>
                     <Row>
                       <Col md={6}>
                         <FormGroup>
@@ -112,7 +112,7 @@ class UserProfile extends Component {
                       Alterar
                     </Button>
                     <div className="clearfix" />
-                  </form>
+                  </Form>
                 }
               />
             </Col>

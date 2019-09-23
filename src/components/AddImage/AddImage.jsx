@@ -1,40 +1,46 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import Add from '../../assets/img/icons/add_image.png';
+import AddHover from '../../assets/img/icons/add_image_hover.png';
 
-const button_style = {
-  backgroundColor: "transparent",
-  backgroundRepeat:"no-repeat",
-  border: "none",
-  cursor:"pointer",
-  overflow: "hidden",
-  outline:"none",
-  padding:0, 
-  margin:0, 
-  borderRadius:"100%"
-}
-
-export class MarketplaceAdsStatus extends Component {
+export class AddImage extends Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
+    this.hover = this.hover.bind(this);
+    this.out = this.out.bind(this);
     this.state = {
-      popoverOpen: false
+      iconAdd: Add,
+      mouseHover: false
     };
   }
 
-  toggle() {
-    this.setState({
-      popoverOpen: !this.state.popoverOpen
-    });
+  hover() {
+    this.setState({ iconAdd: AddHover });
+  }
+  out() {
+    this.setState({ iconAdd: Add });
+  }
+
+  _handleImageChange = (e) => {
+    this.props._handleImageChange(e);
   }
 
   render() {
     return (
-      <div>      
-
+      <div className="add-image">
+        <label title="Adicionar imagem" htmlFor="file-input" onMouseOver={this.hover} onMouseOut={this.out} >
+          <img alt="Adicionar imagem" src={this.state.iconAdd} />
+        </label>
+        <input id="file-input"
+          accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
+          type="file" multiple=""
+          onChange={(e) => {
+            e.preventDefault();
+            this._handleImageChange(e);
+          }} />
       </div>
     );
   }
 }
 
-export default MarketplaceAdsStatus;
+export default AddImage;

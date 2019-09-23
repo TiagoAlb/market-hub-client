@@ -6,7 +6,7 @@ import app from "../src/routes/app.jsx";
 import "./assets/css/animate.min.css";
 import "./assets/css/demo.css";
 import "./assets/css/pe-icon-7-stroke.css";
-import "./assets/sass/light-bootstrap-dashboard.css?v=1.2.0";
+import "./assets/sass/markethub-style.css?v=1.2.0";
 import LoadingPage from "./components/LoadingPage/LoadingPage.jsx";
 
 ReactDOM.render(

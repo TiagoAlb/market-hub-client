@@ -70,7 +70,7 @@ class Ads extends Component {
                 fill pullRight
                 color="success"
                 onClick={this.toggle}>
-                <i class="material-icons">post_add</i>
+                <i className="material-icons">post_add</i>
               </Button>
             </Col>
           </Row>
@@ -95,7 +95,7 @@ class Ads extends Component {
                             {buttons_ads.map((prop, key) => {
                               let prop_tooltip_id = "tooltip_" + prop.icon_name + "_" + key + "_" + card_key;
                               return (
-                                <ImgLink id={prop_tooltip_id} placement={prop.placement} color={prop.color} icon_name={prop.icon_name} name={prop.name} />
+                                <ImgLink key={prop_tooltip_id} id={prop_tooltip_id} placement={prop.placement} color={prop.color} icon_name={prop.icon_name} name={prop.name} />
                               );
                             })}
                           </div>
@@ -152,7 +152,7 @@ class ImgLink extends Component {
   render() {
     return (
       <div>
-        <i class="material-icons" id={this.props.id} style={{ color: this.props.color }}>{this.props.icon_name}</i>
+        <i className="material-icons" id={this.props.id} style={{ color: this.props.color }}>{this.props.icon_name}</i>
         <Tooltip placement={this.props.placement} style={tooltip_style} isOpen={this.state.tooltipOpen} target={this.props.id} toggle={this.toggle}>
           {this.props.name}
         </Tooltip>

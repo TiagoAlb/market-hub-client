@@ -118,9 +118,6 @@ class CompanyRegistration extends Component {
 
         if (this.validateImage(fileData)) {
             reader.onloadend = () => {
-                this.setState({
-                    file: fileData
-                });
                 this.setValues("image", reader.result);
             };
             reader.readAsDataURL(fileData)

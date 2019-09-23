@@ -19,8 +19,10 @@ class AdsCreate extends Component {
                 condition: 'new',
                 available_quantity: 1,
                 video_id: '',
-                description: ''
+                description: '',
+                image_list: [],
             },
+            image_upload_list: [],
             category_nav_list: {},
             category_list: {}
         }
@@ -28,6 +30,7 @@ class AdsCreate extends Component {
         this.decrementStep = this.decrementStep.bind(this);
         this.setAdsValues = this.setAdsValues.bind(this);
         this.changeCategoryNavList = this.changeCategoryNavList.bind(this);
+        this._handleImageChange = this._handleImageChange.bind(this);
         this.categorySearch = this.categorySearch.bind(this);
         this.AdsService = new AdsService();
     }
@@ -44,8 +47,9 @@ class AdsCreate extends Component {
                 this.setState({
                     category_nav_list: success
                 });
-                if(success.length > 0)
-                    this.categorySearch(success[success.length-1].id, '');
+                this.setAdsValues('category_id', success[success.length - 1]);
+                if (success.length > 0)
+                    this.categorySearch(success[success.length - 1].id, '');
                 else
                     this.categorySearch('', '');
             }, (error) => {
@@ -74,8 +78,55 @@ class AdsCreate extends Component {
         )
     }
 
+    _handleImageChange(e) {
+        e.preventDefault();
+        let reader = new FileReader();
+        let fileData = e.target.files[0];
+        let data = new FormData();
+        data.append('file', e.target.files[0]);
+        data.append('name', 'profile_avatar');
+        data.append('description', 'Image profile');
+
+        let images = this.state.ads.image_list;
+        images.push({ data });
+
+        this.setState((state) => state.ads.image_list = images);
+
+        if (this.validateImage(fileData)) {
+            reader.onloadend = () => {
+                let images_upload = this.state.image_upload_list;
+                images_upload.push({ 'img': reader.result });
+
+                this.setState({ image_upload_list: images_upload });
+            };
+            reader.readAsDataURL(fileData)
+        }
+    }
+
+    validateImage(file) {
+        if (file) {
+            let num = file.name.split(".").length;
+            let name = file.name.split(".")[num - 1].toLowerCase();
+            if (file.size <= 1048576) {
+                if (name === "png" || name === "tiff" || name === "jpg" || name === "jpeg" || name === "bmp") {
+                    this.setState({ error: "" });
+                    return true;
+                } else {
+                    this.setState({ error: "Formato inválido! São aceitos apenas arquivos no formato de imagem." });
+                    return false;
+                }
+            } else {
+                this.setState({ error: "A imagem não pode ser maior que 1mb." });
+                return false;
+            }
+        } else {
+            this.setState({ error: "" });
+            return false;
+        }
+    }
+
     changeCategoryNavList(condition, categoryIndex, object) {
-        switch(condition) {
+        switch (condition) {
             case 'add':
                 let obj = this.state.category_nav_list;
                 obj.push(object);
@@ -86,20 +137,20 @@ class AdsCreate extends Component {
                 break;
             case 'delete':
                 this.setState({
-                    category_nav_list: this.state.category_nav_list.splice(0, categoryIndex+1)
+                    category_nav_list: this.state.category_nav_list.splice(0, categoryIndex + 1)
                 });
                 break;
             default:
                 break;
         }
-        
+        this.setAdsValues('category_id', this.state.category_nav_list[this.state.category_nav_list.length - 1]);
     }
 
     setAdsValues(attribute, value) {
         this.setState(
             (state) => state.ads[attribute] = value
         );
-        if(attribute==='title')
+        if (attribute === 'title')
             this.categoryNavSearch(value, '');
     }
 
@@ -122,7 +173,7 @@ class AdsCreate extends Component {
     render() {
         return (
             <Container fluid>
-                <br/>
+                <br />
                 <AdsForm
                     step={this.state.step}
                     onSelectCategory={this.handleStepCategory}
@@ -132,6 +183,8 @@ class AdsCreate extends Component {
                     category_nav_list={this.state.category_nav_list}
                     category_list={this.state.category_list}
                     changeCategoryNavList={this.changeCategoryNavList}
+                    _handleImageChange={this._handleImageChange}
+                    image_upload_list={this.state.image_upload_list}
                 />
                 {this.state.step > 0 ?
                     <ModalFooter>
@@ -146,7 +199,7 @@ class AdsCreate extends Component {
                             </Button>
                         </div>
                     </ModalFooter>
-                :
+                    :
                     ''
                 }
             </Container>

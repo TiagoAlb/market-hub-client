@@ -12,7 +12,7 @@ export class ListItem extends Component {
                 {this.props.item_name}
             </Col>
             <Col xs={'auto'}>
-                <i class='material-icons'>arrow_forward_ios</i>
+                <i className='material-icons'>arrow_forward_ios</i>
             </Col>
         </Row>
     );
