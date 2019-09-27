@@ -348,6 +348,33 @@ class Step4 extends Component {
                     <br />
                     {this.imageUploadList()}
                 </FormGroup>
+                <FormGroup>
+                    <Label>Quantidade</Label>
+                    <Input type='text' name='model' id='model'
+                        placeholder='Modelo'
+                        onChange={(e) => {
+
+                        }}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Preço</Label>
+                    <Input type='text' name='model' id='model'
+                        placeholder='Modelo'
+                        onChange={(e) => {
+
+                        }}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Estado</Label>
+                    <Input type="select" name="select" id="linkMarketplace"
+                        onChange={(e) => {  }}>
+                        <option value={1}>Novo</option>
+                        <option value={2}>Usado</option>
+                        <option value={3}>Recondicionado</option>
+                    </Input>
+                </FormGroup>
             </Form>
         );
     }
