@@ -351,7 +351,7 @@ class Step4 extends Component {
                 <FormGroup>
                     <Label>Quantidade</Label>
                     <Input type='text' name='model' id='model'
-                        placeholder='Modelo'
+                        placeholder='Quantidade'
                         onChange={(e) => {
 
                         }}
@@ -360,7 +360,7 @@ class Step4 extends Component {
                 <FormGroup>
                     <Label>Preço</Label>
                     <Input type='text' name='model' id='model'
-                        placeholder='Modelo'
+                        placeholder='Preço'
                         onChange={(e) => {
 
                         }}
