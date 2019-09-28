@@ -10,7 +10,7 @@ class AdsCreate extends Component {
         super(props);
 
         this.state = {
-            step: 0,
+            step: 1,
             category_id: '',
             ads: {
                 title: '',
@@ -23,6 +23,7 @@ class AdsCreate extends Component {
                 image_list: [],
             },
             image_upload_list: [],
+            marketplaces_available_list: [],
             category_nav_list: {},
             category_list: {}
         }
@@ -185,6 +186,7 @@ class AdsCreate extends Component {
                     changeCategoryNavList={this.changeCategoryNavList}
                     _handleImageChange={this._handleImageChange}
                     image_upload_list={this.state.image_upload_list}
+                    profile_id={this.props.profile_id}
                 />
                 {this.state.step > 0 ?
                     <ModalFooter>

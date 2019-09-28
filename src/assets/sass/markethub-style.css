@@ -1756,15 +1756,22 @@ body > .navbar-collapse[data-color="purple"]:after {
 .btn-group.select.open {
   overflow: visible; }
 
-.ads_status {
-  width: 35px;
-  height: 35px;
+.marketplace_icon {
   border: 3px solid;
   border-radius: 100%;
   overflow: hidden;
   position: relative; }
 
-.ads_status img {
+#icon_line {
+  border: 1px solid;
+  border-color: transparent;
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden; }
+
+.marketplace_icon img {
   bottom: 0;
   width: 100%;
   height: 100%; }
@@ -1955,7 +1962,7 @@ body > .navbar-collapse[data-color="purple"]:after {
 .card-image .cardImage {
   width: 120px;
   height: 120px;
-  border: 4px solid #f8f7f7;
+  border: 4px solid #e7e7e7;
   border-radius: 50%;
   overflow: hidden;
   position: relative;

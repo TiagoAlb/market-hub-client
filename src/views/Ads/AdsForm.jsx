@@ -8,6 +8,7 @@ import {
 import ListItem from '../../components/ListItem/ListItem.jsx';
 import AddImage from '../../components/AddImage/AddImage.jsx';
 import ImageSelection from '../../components/ImageSelection/ImageSelection.jsx';
+import AdsAvailableMarketplacesList from './AdsAvailableMarketplacesList.jsx';
 
 const ads_categoty = [
     {
@@ -50,9 +51,9 @@ class AdsForm extends Component {
     }
     render() {
         switch (this.props.step) {
-            case 0:
-                return <Step1 onSelectCategory={this.props.onSelectCategory} />
             case 1:
+                return <Step1 onSelectCategory={this.props.onSelectCategory} />
+            case 2:
                 return (
                     <Step2 setAdsValues={this.props.setAdsValues}
                         ads={this.state.ads}
@@ -62,14 +63,18 @@ class AdsForm extends Component {
                         changeCategoryNavList={this.props.changeCategoryNavList}
                     />
                 );
-            case 2:
-                return <Step3 />
             case 3:
+                return <Step3 />
+            case 4:
                 return (
                     <Step4
                         _handleImageChange={this.props._handleImageChange}
                         image_upload_list={this.props.image_upload_list}
                     />
+                );
+            case 5:
+                return (
+                    <Step5 marketplaces_available_list={this.props.marketplaces_available_list} profile_id={this.props.profile_id} />
                 );
             default:
                 return (
@@ -348,32 +353,72 @@ class Step4 extends Component {
                     <br />
                     {this.imageUploadList()}
                 </FormGroup>
-                <FormGroup>
-                    <Label>Quantidade</Label>
-                    <Input type='text' name='model' id='model'
-                        placeholder='Quantidade'
-                        onChange={(e) => {
+                <Row>
+                    <Col md="6">
+                        <FormGroup>
+                            <Label>Quantidade</Label>
+                            <Input type='text' name='quantity' id='ads_quantity'
+                                placeholder='1'
+                                onChange={(e) => {
 
-                        }}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Label>Preço</Label>
-                    <Input type='text' name='model' id='model'
-                        placeholder='Preço'
-                        onChange={(e) => {
+                                }}
+                            />
+                        </FormGroup>
+                    </Col>
+                    <Col md="6">
+                        <FormGroup>
+                            <Label>Preço</Label>
+                            <Input type='text' name='price' id='price'
+                                placeholder='R$'
+                                onChange={(e) => {
 
-                        }}
-                    />
-                </FormGroup>
+                                }}
+                            />
+                        </FormGroup>
+                    </Col>
+                </Row>
                 <FormGroup>
-                    <Label>Estado</Label>
-                    <Input type="select" name="select" id="linkMarketplace"
-                        onChange={(e) => {  }}>
+                    <Label>Condição</Label>
+                    <Input type="select" name="condition" id="condition"
+                        onChange={(e) => { }}>
                         <option value={1}>Novo</option>
                         <option value={2}>Usado</option>
                         <option value={3}>Recondicionado</option>
                     </Input>
+                </FormGroup>
+            </Form>
+        );
+    }
+}
+
+class Step5 extends Component {
+    marketplacesAvailableList() {
+        return (
+            <div style={{ overflowY: 'hidden', overflowX: 'auto' }}>
+                <tr>
+                    {this.props.marketplaces_available_list.length > 0 ?
+                        this.props.marketplaces_available_list.map((prop, key) => {
+                            return <td><ImageSelection key={key} src={prop.img} alt={"Image " + key} /></td>
+                        })
+                        : ''}
+                </tr>
+            </div>
+        );
+    }
+    render() {
+        return (
+            <Form>
+                <FormGroup>
+                    <Label for='attributes'>Descreva seu produto</Label>
+                    <FormText color='muted'>
+                        Selecione imagens nítidas e com boa iluminação para representar o seu anúncio.
+                        A quantidade de uploads pode variar de acordo com o marketplace.
+                    </FormText>
+                    <Input type="textarea" name="description" id="description" />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Selecione os Marketplaces a vincular</Label>
+                    <AdsAvailableMarketplacesList profile_id={this.props.profile_id} />
                 </FormGroup>
             </Form>
         );

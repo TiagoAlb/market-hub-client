@@ -8,7 +8,7 @@ import AdsImage from "../../assets/img/ads.jpg";
 import Americanas from "../../assets/img/americanas.jpg";
 import MercadoLivre from "../../assets/img/ml_white.png";
 import Button from "../../components/CustomButton/CustomButton.jsx";
-import MarketplaceAdsStatus from "../../components/MarketplaceAdsStatus/MarketplaceAdsStatus.jsx";
+import MarketplaceIcon from "../../components/MarketplaceIcon/MarketplaceIcon.jsx";
 import { iconsArray } from "../../variables/Variables.jsx";
 import AdsCreate from "./AdsCreate.jsx";
 
@@ -53,7 +53,7 @@ class Ads extends Component {
       <Modal isOpen={this.state.modal} toggle={this.toggle}>
         <ModalHeader toggle={this.toggle}>Publicar Anúncio</ModalHeader>
         <ModalBody style={{ margin: "0", padding: "0" }}>
-          <AdsCreate />
+          <AdsCreate profile_id={this.props.profile.id} />
         </ModalBody>
       </Modal>
     );
@@ -107,10 +107,10 @@ class Ads extends Component {
                           <div>
                             <Row style={{ float: "right", margin: "0", padding: "0" }}>
                               <Col style={{ padding: "2" }}>
-                                <MarketplaceAdsStatus id={"ads_status_1_" + card_key} marketplaceName={"Mercado Livre"} avatar={MercadoLivre} status="success" />
+                                <MarketplaceIcon id={"ads_status_1_" + card_key} marketplaceName={"Mercado Livre"} avatar={MercadoLivre} status="success" />
                               </Col>
                               <Col style={{ padding: "2" }}>
-                                <MarketplaceAdsStatus id={"ads_status_2_" + card_key} marketplaceName={"Americanas"} avatar={Americanas} status="warning" />
+                                <MarketplaceIcon id={"ads_status_2_" + card_key} marketplaceName={"Americanas"} avatar={Americanas} status="warning" />
                               </Col>
                             </Row>
                           </div>

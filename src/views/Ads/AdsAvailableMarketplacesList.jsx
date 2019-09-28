@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { Alert, Button } from "reactstrap";
-import ImageCard from "../../components/ImageCard/ImageCard.jsx";
-import CompanyService from "../../services/CompanyServices/CompanyService.jsx";
+import React, { Component } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { Alert, Row, Col } from 'reactstrap';
+import CompanyService from '../../services/CompanyServices/CompanyService.jsx';
+import MarketplaceIcon from '../../components/MarketplaceIcon/MarketplaceIcon.jsx';
 import loginService from '../../services/LoginService.jsx';
 
-export default class MarketplacesList extends Component {
+export default class AdsAvailableMarketplacesList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -35,6 +35,7 @@ export default class MarketplacesList extends Component {
     nextPage() {
         this.CompanyService.readMarketplaces(this.props.profile_id, this.state.pageable.page,
             (result) => {
+                console.log(result.content);
                 this.setState({
                     items: this.state.items.concat(result.content),
                     hasMore: true,
@@ -72,7 +73,6 @@ export default class MarketplacesList extends Component {
                     dataLength={this.state.items.length}
                     next={this.fetchMoreData}
                     hasMore={this.state.hasMore}
-                    loader={<Alert color="info">{this.state.message}</Alert>}
                     endMessage={
                         <Alert color="success">
                             {this.state.pageable.totalElements}
@@ -80,23 +80,17 @@ export default class MarketplacesList extends Component {
                         </Alert>
                     }
                 >
-                    {this.state.items.map((i, index) => {
-                        return (
-                            <ImageCard
-                                key={i.id}
-                                avatar={`/api/marketplaces/` + i.id + `/image?` + loginService.getAuthorizationGet()}
-                                content={
-                                    <h3>{i.name}</h3>
-                                }
-                                options={
-                                    <Button color="danger" value={i.id} onClick={(event) => { this.props.toggle(event.target.value) }}>
-                                        CONECTAR
-                                            </Button>
-                                }
-                                width={this.props.width}
-                            />
-                        );
-                    })}
+                    <tr style={{ float: 'right' }}>
+                        {this.state.items.map((i, index) => {
+                            return (
+                                <td style={{ paddingLeft: '2px' }}>
+                                    <MarketplaceIcon key={i.id} id={"ads_icon_" + i.id}
+                                        marketplaceName={i.name} avatar={`/api/marketplaces/` + i.id + `/image?` + loginService.getAuthorizationGet()}
+                                        tam='50px' />
+                                </td>
+                            );
+                        })}
+                    </tr>
                 </InfiniteScroll>
             </div>
         } else {
