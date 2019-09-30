@@ -418,7 +418,9 @@ class Step5 extends Component {
                 </FormGroup>
                 <FormGroup>
                     <Label>Selecione os Marketplaces a vincular</Label>
-                    <AdsAvailableMarketplacesList profile_id={this.props.profile_id} />
+                    <div style={{ overflowY: 'hidden', overflowX: 'auto' }}>
+                        <AdsAvailableMarketplacesList profile_id={this.props.profile_id} />
+                    </div>
                 </FormGroup>
             </Form>
         );

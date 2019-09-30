@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Alert, Row, Col } from 'reactstrap';
+import { Alert } from 'reactstrap';
 import CompanyService from '../../services/CompanyServices/CompanyService.jsx';
 import MarketplaceIcon from '../../components/MarketplaceIcon/MarketplaceIcon.jsx';
 import loginService from '../../services/LoginService.jsx';
@@ -10,16 +10,19 @@ export default class AdsAvailableMarketplacesList extends Component {
         super(props);
         this.state = {
             items: Array.from({ length: 0 }),
-            message: "Carregando...",
+            message: 'Carregando...',
             pageable: {
                 page: 0,
                 totalPages: 0,
                 totalElements: 0
             },
+            selected: false,
+            status: '',
             hasMore: true
         };
         this.fetchMoreData.call(this);
         this.CompanyService = new CompanyService();
+        this.alertIcon = this.alertIcon.bind(this);
     }
 
     fetchMoreData = () => {
@@ -66,6 +69,13 @@ export default class AdsAvailableMarketplacesList extends Component {
         this.fetchMoreData.call(this);
     }
 
+    alertIcon(id) {
+        this.setState({
+            selected: !this.state.selected,
+            status: this.state.selected ? '' : 'selected'
+        });
+    }
+
     render() {
         if (this.state.items.length > 0) {
             return <div>
@@ -81,12 +91,14 @@ export default class AdsAvailableMarketplacesList extends Component {
                     }
                 >
                     <tr style={{ float: 'right' }}>
-                        {this.state.items.map((i, index) => {
+                        {this.state.items.map((i, key) => {
                             return (
                                 <td style={{ paddingLeft: '2px' }}>
-                                    <MarketplaceIcon key={i.id} id={"ads_icon_" + i.id}
+                                    <MarketplaceIcon id={"ads_icon_" + i.id} key={i.id}
                                         marketplaceName={i.name} avatar={`/api/marketplaces/` + i.id + `/image?` + loginService.getAuthorizationGet()}
-                                        tam='50px' />
+                                        tam='50px'
+                                        onClickCall={this.alertIcon}
+                                        status={this.state.status} />
                                 </td>
                             );
                         })}

@@ -39,7 +39,7 @@ class MarketplaceLogin extends Component {
                 ));
                 window.parent.location.href = "/#/marketplaces/login";
             } else {
-                modalBody = <Iframe url="https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=3919471605726765"
+                modalBody = <Iframe url="http://auth.mercadolivre.com.br/authorization?response_type=code&client_id=3919471605726765"
                     id="marketplaceLogin"
                     width="100%"
                     height="100%"

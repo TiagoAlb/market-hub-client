@@ -29,9 +29,13 @@ class MarketplaceIcon extends Component {
     });
   }
 
+  onClickCall = () => {
+    this.props.onClickCall(this.props.id, this.props.index);
+  }
+
   render() {
     let statusColor = '#E0E0E0';
-    if (this.props.status != null) {
+    if (this.props.status) {
       if (this.props.status === 'success')
         statusColor = '#00C851';
       else if (this.props.status === 'warning')
@@ -40,6 +44,8 @@ class MarketplaceIcon extends Component {
         statusColor = '#33B5E5';
       else if (this.props.status === 'danger')
         statusColor = '#FF4444';
+      else if (this.props.status === 'selected')
+        statusColor = '#3472F7';
     }
 
     let tam = '38px';
@@ -48,10 +54,12 @@ class MarketplaceIcon extends Component {
       tam = this.props.tam;
     }
 
-
     return (
       <div>
-        <Button id={this.props.id} onMouseOver={this.toggle} onMouseOut={this.toggle} className="btn-link" style={button_style} type="button">
+        <Button id={this.props.id} onClick={() => this.props.onClickCall ? this.onClickCall() : ''}
+          onMouseOver={this.props.popover ? this.toggle : ''}
+          onMouseOut={this.props.popover ? this.toggle : ''}
+          className="btn-link" style={button_style} type="button">
           <div className="marketplace_icon" style={{ borderColor: statusColor, width: tam, height: tam }}>
             <div id="icon_line">
               <img alt="auto" src={this.props.avatar} />
