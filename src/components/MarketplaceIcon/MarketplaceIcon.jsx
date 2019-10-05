@@ -30,7 +30,7 @@ class MarketplaceIcon extends Component {
   }
 
   onClickCall = () => {
-    this.props.onClickCall(this.props.id, this.props.index);
+    this.props.onClickCall(this.props.id);
   }
 
   render() {
@@ -56,7 +56,7 @@ class MarketplaceIcon extends Component {
 
     return (
       <div>
-        <Button id={this.props.id} onClick={() => this.props.onClickCall ? this.onClickCall() : ''}
+        <Button id={this.props.idItem} onClick={() => this.props.onClickCall ? this.onClickCall() : ''}
           onMouseOver={this.props.popover ? this.toggle : ''}
           onMouseOut={this.props.popover ? this.toggle : ''}
           className="btn-link" style={button_style} type="button">
@@ -66,7 +66,7 @@ class MarketplaceIcon extends Component {
             </div>
           </div>
         </Button>
-        <Popover placement="bottom" isOpen={this.state.popoverOpen} target={this.props.id}>
+        <Popover placement="bottom" isOpen={this.state.popoverOpen} target={this.props.idItem}>
           <PopoverHeader style={{ backgroundColor: statusColor, marginTop: 6, color: "white" }}>{this.props.marketplaceName}</PopoverHeader>
           <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
         </Popover>

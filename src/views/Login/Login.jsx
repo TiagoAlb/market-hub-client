@@ -66,70 +66,71 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="content" style={{ backgroundColor: '#F1F1F1' }}>
-                <Container fluid>
-                    <Row>
-                        <Col md={7}>
-                            <Row>
-                                <div className='login_titles'>
-                                    <h2>MARKET HUB</h2>
-                                    <h4>CADASTRE SEUS ANÚNCIOS EM DIVERSAS PLATAFORMAS</h4>
-                                </div>
-                            </Row>
-                            <Row>
-                                <img alt='auto' src={Logo} className='login_logo' />
-                            </Row>
-                        </Col>
-                        <Col>
-                            <div className='form_login'>
-                                <Card
-                                    plain
-                                    title='Acesse sua conta'
-                                    content={
-                                        <Form className='form_login_input' onSubmit={(e) => {
-                                            e.preventDefault(); this.login()
-                                        }}>
-                                            <FormGroup>
-                                                <Label>Email</Label>
-                                                <Input
-                                                    type='text'
-                                                    placeholder='Ex: seuemail@email.com'
-                                                    required
-                                                    onChange={(e) => this.setValue('emailAddress', e.target.value)}
-                                                />
-                                            </FormGroup>
-
-                                            <FormGroup>
-                                                <Label>Senha</Label>
-                                                <Input
-                                                    type='password'
-                                                    placeholder='********'
-                                                    required
-                                                    onChange={(e) => this.setValue('password', e.target.value)}
-                                                />
-                                            </FormGroup>
-                                            <div>
-                                                <Link to='/recuperacaoSenha'>
-                                                    <p className='text-danger'>
-                                                        Esqueceu sua senha?
+            <div className="divLogin">
+                <div className="content" style={{ backgroundColor: '#F1F1F1' }}>
+                    <Container fluid>
+                        <Row>
+                            <Col md={7}>
+                                <Row>
+                                    <div className='login_titles'>
+                                        <h2>MARKET HUB</h2>
+                                        <h4>CADASTRE SEUS ANÚNCIOS EM DIVERSAS PLATAFORMAS</h4>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <img alt='auto' src={Logo} className='login_logo' />
+                                </Row>
+                            </Col>
+                            <Col>
+                                <div className='form_login'>
+                                    <Card
+                                        plain
+                                        title='Acesse sua conta'
+                                        content={
+                                            <Form className='form_login_input' onSubmit={(e) => {
+                                                e.preventDefault(); this.login()
+                                            }}>
+                                                <FormGroup>
+                                                    <Label>Email</Label>
+                                                    <Input
+                                                        type='text'
+                                                        placeholder='Ex: seuemail@email.com'
+                                                        required
+                                                        onChange={(e) => this.setValue('emailAddress', e.target.value)}
+                                                    />
+                                                </FormGroup>
+                                                <FormGroup>
+                                                    <Label>Senha</Label>
+                                                    <Input
+                                                        type='password'
+                                                        placeholder='********'
+                                                        required
+                                                        onChange={(e) => this.setValue('password', e.target.value)}
+                                                    />
+                                                </FormGroup>
+                                                <div>
+                                                    <Link to='/recuperacaoSenha'>
+                                                        <p className='text-danger'>
+                                                            Esqueceu sua senha?
                                                 </p>
-                                                </Link>
-                                            </div>
-                                            <div style={{ width: '100%' }}>
-                                                <CustomButtom fill className='pattern_button'>Entrar</CustomButtom>
-                                                <p style={{ float: 'right' }}>
-                                                    Não possui conta? &nbsp;
+                                                    </Link>
+                                                </div>
+                                                <div style={{ width: '100%' }}>
+                                                    <CustomButtom fill className='pattern_button'>Entrar</CustomButtom>
+                                                    <p style={{ float: 'right' }}>
+                                                        Não possui conta? &nbsp;
                                                 <Link to='/companyRegistration' style={{ color: '#009688', fontFamily: 'Roboto', fontStyle: 'normal', fontWeight: '300', lineHeight: 'normal' }}>
-                                                        Cadastre-se</Link>
-                                                </p>
-                                            </div>
-                                        </Form>
-                                    }
-                                />
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
+                                                            Cadastre-se</Link>
+                                                    </p>
+                                                </div>
+                                            </Form>
+                                        }
+                                    />
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>
             </div>
         );
     }

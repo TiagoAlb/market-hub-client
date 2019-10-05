@@ -107,10 +107,10 @@ class Ads extends Component {
                           <div>
                             <Row style={{ float: "right", margin: "0", padding: "0" }}>
                               <Col style={{ padding: "2" }}>
-                                <MarketplaceIcon popover id={"ads_status_1_" + card_key} marketplaceName={"Mercado Livre"} avatar={MercadoLivre} status="success" />
+                                <MarketplaceIcon popover id={card_key} idItem={"ads_status_1_" + card_key} marketplaceName={"Mercado Livre"} avatar={MercadoLivre} status="success" />
                               </Col>
                               <Col style={{ padding: "2" }}>
-                                <MarketplaceIcon popover id={"ads_status_2_" + card_key} marketplaceName={"Americanas"} avatar={Americanas} status="warning" />
+                                <MarketplaceIcon popover id={card_key} idItem={"ads_status_2_" + card_key} marketplaceName={"Americanas"} avatar={Americanas} status="warning" />
                               </Col>
                             </Row>
                           </div>

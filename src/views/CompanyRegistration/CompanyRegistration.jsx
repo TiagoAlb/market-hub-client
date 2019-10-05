@@ -152,17 +152,17 @@ class CompanyRegistration extends Component {
         else
             return (
                 <div className="main">
-                    <Container fluid>
-                        <Form className="form_login_input" onSubmit={(e) => {
-                            e.preventDefault();
-                            this.createProfile();
-                        }}>
+                    <div className="content" style={{ backgroundColor: '#F1F1F1', padding: '5%' }}>
+                        <Container fluid>
                             <Row>
                                 <Col>
                                     <Card
                                         title="Cadastre sua empresa"
                                         content={
-                                            <div>
+                                            <Form className="form_create" onSubmit={(e) => {
+                                                e.preventDefault();
+                                                this.createProfile();
+                                            }}>
                                                 <Row>
                                                     <Col>
                                                         <Label style={{ fontWeight: 'bold' }}>DADOS DA CONTA</Label>
@@ -289,14 +289,14 @@ class CompanyRegistration extends Component {
                                                         </FormGroup>
                                                     </Col>
                                                 </Row>
-                                            </div>
+                                            </Form>
                                         }
                                     />
                                 </Col>
                                 {this.changeProfileImage()}
                             </Row>
-                        </Form>
-                    </Container>
+                        </Container>
+                    </div>
                 </div>
             );
     }

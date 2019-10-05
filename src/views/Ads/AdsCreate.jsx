@@ -188,7 +188,7 @@ class AdsCreate extends Component {
                     image_upload_list={this.state.image_upload_list}
                     profile_id={this.props.profile_id}
                 />
-                {this.state.step > 0 ?
+                {this.state.step > 1 ?
                     <ModalFooter>
                         <div style={{ width: '100%' }}>
                             <Button onClick={this.decrementStep}>

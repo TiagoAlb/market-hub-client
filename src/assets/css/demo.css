@@ -526,10 +526,6 @@
     height: 35%;
 }
 
-.form_login_input {
-    width: 100%;
-}
-
 .loginGoogle {
     height: auto;
     width: 100%;
@@ -545,7 +541,6 @@
     background-color: #F1F1F1;
     width: 100%;
     height: 100%;
-    padding: 5%;
 }
 
 .divLogin {
