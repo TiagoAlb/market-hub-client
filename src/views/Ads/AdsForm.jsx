@@ -336,7 +336,7 @@ class Step4 extends Component {
                         this.props.image_upload_list.map((prop, key) => {
                             return <td><ImageSelection key={key} src={prop.img} alt={"Image " + key} /></td>
                         })
-                        : ''}
+                        : <td></td>}
                 </tr>
             </div>
         );

@@ -26,7 +26,7 @@ export default class AdsService extends RestService {
     }
 
     categorySearch(search, success, error) {
-        fetch(`api/ads/categories?categories=${search.category}&name=${search.name}`, {
+        fetch(`api/ads/categories?category=${search.category}&name=${search.name}`, {
             method: 'GET',
             headers: new Headers({
                 'Authorization': loginService.getAuthorization(),
