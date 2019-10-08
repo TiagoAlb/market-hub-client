@@ -11,6 +11,7 @@ class LoginService {
             method: "GET"
         }
         ).then((response) => {
+            console.log(response);
             if (response.ok) {
                 response.json().then((data) => {
                     this.token = response.headers.get("token");

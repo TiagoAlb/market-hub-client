@@ -116,7 +116,7 @@ class Login extends Component {
                                                     </Link>
                                                 </div>
                                                 <div style={{ width: '100%' }}>
-                                                    <CustomButtom fill className='pattern_button'>Entrar</CustomButtom>
+                                                    <CustomButtom fill>Entrar</CustomButtom>
                                                     <p style={{ float: 'right' }}>
                                                         Não possui conta? &nbsp;
                                                 <Link to='/companyRegistration' style={{ color: '#009688', fontFamily: 'Roboto', fontStyle: 'normal', fontWeight: '300', lineHeight: 'normal' }}>
