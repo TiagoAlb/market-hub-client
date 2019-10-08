@@ -69,11 +69,12 @@ class AdCreate extends Component {
                 this.setState({
                     category_nav_list: success
                 });
-                this.setProductValues('ml_id', success[success.length - 1]);
-                if (success.length > 0)
+                if (success.length > 0) {
+                    this.setProductValues('ml_id', success[success.length - 1]);
                     this.categorySearch(success[success.length - 1].id, '');
-                else
+                } else {
                     this.categorySearch('', '');
+                }
             }, (error) => {
                 console.log('Erro!');
                 console.log(error);
@@ -189,7 +190,9 @@ class AdCreate extends Component {
             default:
                 break;
         }
-        this.setProductValues('ml_id', this.state.category_nav_list[this.state.category_nav_list.length - 1]);
+        if(this.state.category_nav_list.length > 0) {
+            this.setProductValues('ml_id', this.state.category_nav_list[this.state.category_nav_list.length - 1]);
+        }
     }
 
     setAdValues(attribute, value) {
@@ -201,6 +204,7 @@ class AdCreate extends Component {
     }
 
     setProductValues(attribute, value) {
+        console.log(value);
         this.setState(
             (state) => state.ad['category'] = {
                 id: 0,
