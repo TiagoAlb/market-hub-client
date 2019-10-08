@@ -5,14 +5,13 @@ class LoginService {
         this.emailAddress = emailAddress;
         this.password = password;
         fetch(`api/profiles/login`, {
-                headers: new Headers({
-                    'Authorization': this.getAuthorization()
-                }),
-                method: "GET"
-            }
+            headers: new Headers({
+                'Authorization': this.getAuthorization()
+            }),
+            method: "GET"
+        }
         ).then((response) => {
             if (response.ok) {
-                console.log(response);
                 response.json().then((data) => {
                     this.token = response.headers.get("token");
                     sessionStorage.setItem("token", this.token);
@@ -27,11 +26,11 @@ class LoginService {
 
     validateLogin(success) {
         fetch(`api/profiles/validateLogin`, {
-                headers: new Headers({
-                    'Authorization': "Bearer " + sessionStorage.getItem("token")
-                }),
-                method: "GET"
-            }
+            headers: new Headers({
+                'Authorization': "Bearer " + sessionStorage.getItem("token")
+            }),
+            method: "GET"
+        }
         ).then((response) => {
             if (response.ok) {
                 response.json().then((data) => {
@@ -42,7 +41,7 @@ class LoginService {
             } else {
                 sessionStorage.removeItem("token");
                 console.log("error " + response.json().then());
-                window.location.href="/#/";
+                window.location.href = "/#/";
             }
         }).catch();
     }

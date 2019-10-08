@@ -2,7 +2,7 @@ import RestService from '../RestService.jsx';
 import loginService from "../LoginService.jsx";
 
 export default class CompanyService extends RestService {
-    constructor(){
+    constructor() {
         super("/api/profiles");
     }
 
@@ -21,7 +21,7 @@ export default class CompanyService extends RestService {
             method: "GET"
         }).then(trataFetch);
     }
-    
+
     consultarEmail(email, sucesso, erro) {
         let trataFetch = (resultado) => {
             if (resultado.ok) {
@@ -37,8 +37,8 @@ export default class CompanyService extends RestService {
             method: "GET"
         }).then(trataFetch);
     }
-    
-    recuperar(id, sucesso, erro){
+
+    recuperar(id, sucesso, erro) {
         let trataFetch = (resultado) => {
             if (resultado.ok) {
                 resultado.json().then(sucesso)
@@ -53,7 +53,7 @@ export default class CompanyService extends RestService {
             method: "GET"
         }).then(trataFetch);
     }
-    
+
     alterarSenha(codigo, usuario, sucesso, erro) {
         fetch(`api/usuarios/recuperar?codigo=${codigo}`, {
             method: "PUT",
@@ -86,7 +86,7 @@ export default class CompanyService extends RestService {
             }
         });
     }
-    
+
     inserirCodigoRecuperacao(usuarioCodigo, sucesso, erro) {
         fetch(`api/usuarios/code`, {
             method: "POST",
@@ -104,9 +104,8 @@ export default class CompanyService extends RestService {
             }
         });
     }
+
     readMarketplaces(id, page, success, error) {
-        console.log("AQUI SERVIÇO: ");
-        console.log(page);
         let treatFetch = (result) => {
             if (result.ok) {
                 result.json().then(success)
@@ -123,6 +122,7 @@ export default class CompanyService extends RestService {
             method: "GET"
         }).then(treatFetch);
     }
+
     linkMarketplace(profileID, marketplaceID, success, error) {
         fetch(`api/profiles/${profileID}/marketplaces/${marketplaceID}/link`, {
             method: "PUT",
@@ -136,6 +136,25 @@ export default class CompanyService extends RestService {
             } else {
                 result.json().then(
                     (resultError) => error(resultError)
+                )
+            }
+        });
+    }
+
+    createProfile(item, success, error) {
+        fetch(this.url, {
+            method: "POST",
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(item)
+        }).then((result) => {
+            console.log(result);
+            if (result.ok) {
+                result.json().then(success)
+            } else {
+                result.json().then(
+                    (errorResult) => error(errorResult)
                 )
             }
         });

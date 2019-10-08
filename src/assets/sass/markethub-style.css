@@ -1763,7 +1763,7 @@ body > .navbar-collapse[data-color="purple"]:after {
   position: relative; }
 
 #icon_line {
-  border: 1px solid;
+  border: 2px solid;
   border-color: transparent;
   border-radius: 100%;
   width: 100%;

@@ -1,4 +1,4 @@
-import Ads from "../views/Ads/Ads.jsx";
+import Ads from "../views/Ad/Ads.jsx";
 import Dashboard from "../views/Dashboard/Dashboard.jsx";
 import MarketplacesRoute from "../views/Marketplaces/MarketplacesRoute.jsx";
 import UserProfile from "../views/UserProfile/UserProfile.jsx";

@@ -2,38 +2,59 @@ import 'material-design-icons-iconfont';
 import React, { Component } from 'react';
 import { Container, ModalFooter } from 'reactstrap';
 import Button from '../../components/CustomButton/CustomButton.jsx';
-import AdsForm from './AdsForm';
-import AdsService from '../../services/AdsServices/AdsService.jsx';
+import AdForm from './AdForm';
+import AdService from '../../services/AdServices/AdService.jsx';
 
-class AdsCreate extends Component {
+class AdCreate extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             step: 1,
             category_id: '',
-            ads: {
+            ad: {
+                id: 0,
                 title: '',
-                category_id: '',
                 price: 0,
-                condition: 'new',
-                available_quantity: 1,
-                video_id: '',
+                type: '',
+                quantity: 1,
                 description: '',
-                image_list: [],
+                category: {
+                    id: 0,
+                    items: [
+                        {
+                            id: 0,
+                            name: '',
+                            ml_id: ''
+                        }
+                    ]
+                },
+                product: {
+                    id: 0,
+                    name: '',
+                    images: [],
+                    dataSheet: {
+                        id: 0,
+                        items: []
+                    },
+                    condition: {
+                        id: 1
+                    },
+                },
+                marketplaces: []
             },
+            file: new FormData(),
             image_upload_list: [],
             marketplaces_available_list: [],
             category_nav_list: {},
             category_list: {}
         }
-        this.incrementStep = this.incrementStep.bind(this);
-        this.decrementStep = this.decrementStep.bind(this);
-        this.setAdsValues = this.setAdsValues.bind(this);
+        this.incrementDecrementStep = this.incrementDecrementStep.bind(this);
+        this.setAdValues = this.setAdValues.bind(this);
         this.changeCategoryNavList = this.changeCategoryNavList.bind(this);
         this._handleImageChange = this._handleImageChange.bind(this);
         this.categorySearch = this.categorySearch.bind(this);
-        this.AdsService = new AdsService();
+        this.AdService = new AdService();
     }
 
     categoryNavSearch(title, categoryId) {
@@ -43,12 +64,12 @@ class AdsCreate extends Component {
             price: '',
             seller_id: ''
         }
-        this.AdsService.categoryNavSearch(search,
+        this.AdService.categoryNavSearch(search,
             (success) => {
                 this.setState({
                     category_nav_list: success
                 });
-                this.setAdsValues('category_id', success[success.length - 1]);
+                this.setProductValues('ml_id', success[success.length - 1]);
                 if (success.length > 0)
                     this.categorySearch(success[success.length - 1].id, '');
                 else
@@ -67,11 +88,35 @@ class AdsCreate extends Component {
             price: '',
             seller_id: ''
         }
-        this.AdsService.categorySearch(search,
+        this.AdService.categorySearch(search,
             (success) => {
                 this.setState({
                     category_list: success
                 });
+            }, (error) => {
+                console.log('Erro!');
+                console.log(error);
+            }
+        )
+    }
+
+    create() {
+        this.AdService.create(this.state.ad,
+            (success) => {
+                this.setState({
+                    ad: success
+                });
+            }, (error) => {
+                console.log('Erro!');
+                console.log(error);
+            }
+        )
+    }
+
+    update() {
+        this.AdService.update(this.state.ad, this.state.step,
+            (success) => {
+                console.log(success);
             }, (error) => {
                 console.log('Erro!');
                 console.log(error);
@@ -84,24 +129,24 @@ class AdsCreate extends Component {
         let reader = new FileReader();
         let fileData = e.target.files[0];
         let data = new FormData();
-        data.append('file', e.target.files[0]);
+        data.append('file', fileData);
         data.append('name', 'profile_avatar');
         data.append('description', 'Image profile');
 
-        let images = this.state.ads.image_list;
-        images.push({ data });
+        let images = this.state.file;
+        // images.push({ data });
 
-        this.setState((state) => state.ads.image_list = images);
+        this.setState((state) => state.file = data);
 
-        if (this.validateImage(fileData)) {
-            reader.onloadend = () => {
-                let images_upload = this.state.image_upload_list;
-                images_upload.push({ 'img': reader.result });
+        //     if (this.validateImage(fileData)) {
+        reader.onloadend = () => {
+            let images_upload = this.state.image_upload_list;
+            images_upload.push({ 'img': reader.result });
 
-                this.setState({ image_upload_list: images_upload });
-            };
-            reader.readAsDataURL(fileData)
-        }
+            this.setState({ image_upload_list: images_upload });
+        };
+        reader.readAsDataURL(fileData)
+        // }
     }
 
     validateImage(file) {
@@ -144,42 +189,82 @@ class AdsCreate extends Component {
             default:
                 break;
         }
-        this.setAdsValues('category_id', this.state.category_nav_list[this.state.category_nav_list.length - 1]);
+        this.setProductValues('ml_id', this.state.category_nav_list[this.state.category_nav_list.length - 1]);
     }
 
-    setAdsValues(attribute, value) {
+    setAdValues(attribute, value) {
         this.setState(
-            (state) => state.ads[attribute] = value
+            (state) => state.ad[attribute] = value
         );
         if (attribute === 'title')
             this.categoryNavSearch(value, '');
     }
 
-    incrementStep() {
-        this.setState({
-            step: this.state.step + 1
-        });
+    setProductValues(attribute, value) {
+        this.setState(
+            (state) => state.ad['category'] = {
+                id: 0,
+                items: [
+                    {
+                        id: 0,
+                        name: value.name,
+                        ml_id: value.id
+                    }
+                ]
+            }
+        );
     }
 
-    decrementStep() {
-        this.setState({
-            step: this.state.step - 1
-        });
+    insertImages() {
+        /*   this.AdService.insertImages(this.state.ad.id, this.state.file,
+               (success) => {
+                   console.log("Imagens cadastradas!");
+               }, (error) => {
+                   console.log(error);
+               }
+           )*/
+
+        this.AdService.uploadFileProgress(this.state.ad.id, this.state.file);
+    }
+
+    incrementDecrementStep(condition) {
+        if (this.state.step > 1) {
+            if (this.state.ad.id > 0) {
+                this.update();
+            } else {
+                this.create();
+            }
+        }
+        if (this.state.step > 4) {
+            this.insertImages();
+        }
+        if (condition === 'increment') {
+            this.setState({
+                step: this.state.step + 1
+            });
+        } else if (condition === 'decrement') {
+            this.setState({
+                step: this.state.step - 1
+            });
+        }
+
     }
 
     handleStepCategory = (categoryId) => {
-        this.setState({ category_id: categoryId, step: this.state.step + 1 });
+        this.incrementDecrementStep('increment');
+        this.setAdValues('type', categoryId);
+        this.setState({ category_id: categoryId });
     }
 
     render() {
         return (
             <Container fluid>
                 <br />
-                <AdsForm
+                <AdForm
                     step={this.state.step}
-                    onSelectCategory={this.handleStepCategory}
-                    setAdsValues={this.setAdsValues}
-                    ads={this.state.ads}
+                    handleStepCategory={this.handleStepCategory}
+                    setAdValues={this.setAdValues}
+                    ad={this.state.ad}
                     categorySearch={this.categorySearch}
                     category_nav_list={this.state.category_nav_list}
                     category_list={this.state.category_list}
@@ -191,13 +276,13 @@ class AdsCreate extends Component {
                 {this.state.step > 1 ?
                     <ModalFooter>
                         <div style={{ width: '100%' }}>
-                            <Button onClick={this.decrementStep}>
+                            <Button onClick={() => { this.incrementDecrementStep('decrement') }}>
                                 Voltar
                             </Button>
-                            <Button onClick={this.incrementStep}
+                            <Button onClick={() => { this.incrementDecrementStep('increment') }}
                                 fill pullRight
                                 color='primary'>
-                                Próximo
+                                {this.state.step < 5 ? 'Próximo' : 'Publicar'}
                             </Button>
                         </div>
                     </ModalFooter>
@@ -209,4 +294,4 @@ class AdsCreate extends Component {
     }
 }
 
-export default AdsCreate;
+export default AdCreate;

@@ -8,29 +8,29 @@ import {
 import ListItem from '../../components/ListItem/ListItem.jsx';
 import AddImage from '../../components/AddImage/AddImage.jsx';
 import ImageSelection from '../../components/ImageSelection/ImageSelection.jsx';
-import AdsAvailableMarketplacesList from './AdsAvailableMarketplacesList.jsx';
+import AdAvailableMarketplacesList from './AdAvailableMarketplacesList.jsx';
 
-const ads_categoty = [
+const ad_type = [
     {
-        id: 'ctg_1',
+        id: 'MKHPROTY',
         name: 'Produtos',
         icon: 'camera_alt',
         color: ''
     },
     {
-        id: 'ctg_2',
+        id: 'MKHVEHTY',
         name: 'Veículos',
         icon: 'directions_car',
         color: ''
     },
     {
-        id: 'ctg_3',
+        id: 'MKHRESTY',
         name: 'Imóveis',
         icon: 'apartment',
         color: ''
     },
     {
-        id: 'ctg_4',
+        id: 'MKHSERVTY',
         name: 'Serviços',
         icon: 'room_service',
         color: ''
@@ -41,22 +41,22 @@ const search_options_style = {
     padding: '10 0 10 0'
 }
 
-class AdsForm extends Component {
+class AdForm extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            ads: this.props.ads
+            ad: this.props.ad
         }
     }
     render() {
         switch (this.props.step) {
             case 1:
-                return <Step1 onSelectCategory={this.props.onSelectCategory} />
+                return <Step1 handleStepCategory={this.props.handleStepCategory} />
             case 2:
                 return (
-                    <Step2 setAdsValues={this.props.setAdsValues}
-                        ads={this.state.ads}
+                    <Step2 setAdValues={this.props.setAdValues}
+                        ad={this.state.ad}
                         category_nav_list={this.props.category_nav_list}
                         category_list={this.props.category_list}
                         categorySearch={this.props.categorySearch}
@@ -64,17 +64,19 @@ class AdsForm extends Component {
                     />
                 );
             case 3:
-                return <Step3 />
+                return <Step3 setAdValues={this.props.setAdValues} />
             case 4:
                 return (
                     <Step4
                         _handleImageChange={this.props._handleImageChange}
                         image_upload_list={this.props.image_upload_list}
+                        setAdValues={this.props.setAdValues}
                     />
                 );
             case 5:
                 return (
-                    <Step5 marketplaces_available_list={this.props.marketplaces_available_list} profile_id={this.props.profile_id} />
+                    <Step5 setAdValues={this.props.setAdValues}
+                        marketplaces_available_list={this.props.marketplaces_available_list} profile_id={this.props.profile_id} />
                 );
             default:
                 return (
@@ -92,7 +94,7 @@ class AdsForm extends Component {
 
 class Step1 extends Component {
     handleStepCategory = (categoryId) => {
-        this.props.onSelectCategory(categoryId);
+        this.props.handleStepCategory(categoryId);
     }
 
     render() {
@@ -100,14 +102,14 @@ class Step1 extends Component {
             <div>
                 <h4 style={{ marginTop: '0' }}>O que você deseja publicar?</h4>
                 <Row>
-                    {ads_categoty.map((prop, key) => {
+                    {ad_type.map((prop, key) => {
                         return (
                             <Col
                                 md={6}
                                 sm={4}
                                 key={key}
                             >
-                                <div className='category_type' onClick={() => this.handleStepCategory(prop.id)}>
+                                <div className='ad_type' onClick={() => this.handleStepCategory(prop.id)}>
                                     <Card style={{ textAlign: 'center', cursor: 'hand' }}>
                                         <CardBody style={{ padding: '0' }}>
                                             <CardText>
@@ -149,8 +151,8 @@ class Step2 extends Component {
         });
     }
 
-    changeAdsValues = (attribute, value) => {
-        this.props.setAdsValues(attribute, value);
+    setAdValues = (attribute, value) => {
+        this.props.setAdValues(attribute, value);
     }
 
     categorySearch = (category, name) => {
@@ -223,15 +225,15 @@ class Step2 extends Component {
                     <FormText color='muted'>
                         Para melhor identificação, inicie com o nome, marca e modelo de seu produto.
                     </FormText>
-                    <Input type='text' name='title' id='title' value={this.props.ads.title}
+                    <Input type='text' name='title' id='title' value={this.props.ad.title}
                         placeholder='Ex: Câmera Fotográfica Nikon D3200'
                         onChange={(e) => {
                             e.preventDefault();
-                            this.changeAdsValues('title', e.target.value);
+                            this.setAdValues('title', e.target.value);
                         }}
                     />
                 </FormGroup>
-                {this.props.ads.title !== null && this.props.ads.title !== '' ?
+                {this.props.ad.title !== null && this.props.ad.title !== '' ?
                     <FormGroup>
                         <Label for='category_id'>Selecione a categoria de seu produto</Label>
                         <FormText color='muted'>
@@ -341,6 +343,9 @@ class Step4 extends Component {
             </div>
         );
     }
+    setAdValues = (attribute, value) => {
+        this.props.setAdValues(attribute, value);
+    }
     render() {
         return (
             <Form>
@@ -357,10 +362,10 @@ class Step4 extends Component {
                     <Col md="6">
                         <FormGroup>
                             <Label>Quantidade</Label>
-                            <Input type='text' name='quantity' id='ads_quantity'
+                            <Input type='text' name='quantity' id='quantity'
                                 placeholder='1'
                                 onChange={(e) => {
-
+                                    this.setAdValues('quantity', e.target.value);
                                 }}
                             />
                         </FormGroup>
@@ -371,7 +376,7 @@ class Step4 extends Component {
                             <Input type='text' name='price' id='price'
                                 placeholder='R$'
                                 onChange={(e) => {
-
+                                    this.setAdValues('price', e.target.value);
                                 }}
                             />
                         </FormGroup>
@@ -380,7 +385,9 @@ class Step4 extends Component {
                 <FormGroup>
                     <Label>Condição</Label>
                     <Input type="select" name="condition" id="condition"
-                        onChange={(e) => { }}>
+                        onChange={(e) => {
+
+                        }}>
                         <option value={1}>Novo</option>
                         <option value={2}>Usado</option>
                         <option value={3}>Recondicionado</option>
@@ -405,6 +412,11 @@ class Step5 extends Component {
             </div>
         );
     }
+
+    setAdValues = (attribute, value) => {
+        this.props.setAdValues(attribute, value);
+    }
+
     render() {
         return (
             <Form>
@@ -414,12 +426,15 @@ class Step5 extends Component {
                         Selecione imagens nítidas e com boa iluminação para representar o seu anúncio.
                         A quantidade de uploads pode variar de acordo com o marketplace.
                     </FormText>
-                    <Input type="textarea" name="description" id="description" />
+                    <Input type="textarea" name="description" id="description"
+                        onChange={(e) => {
+                            this.setAdValues('description', e.target.value);
+                        }} />
                 </FormGroup>
                 <FormGroup>
                     <Label>Selecione os Marketplaces a vincular</Label>
                     <div style={{ overflowY: 'hidden', overflowX: 'auto' }}>
-                        <AdsAvailableMarketplacesList profile_id={this.props.profile_id} />
+                        <AdAvailableMarketplacesList profile_id={this.props.profile_id} />
                     </div>
                 </FormGroup>
             </Form>
@@ -427,4 +442,4 @@ class Step5 extends Component {
     }
 }
 
-export default AdsForm;
+export default AdForm;

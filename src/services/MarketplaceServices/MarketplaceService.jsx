@@ -2,12 +2,11 @@ import RestService from "../RestService.jsx";
 import loginService from "../LoginService.jsx";
 
 export default class MarketplaceService extends RestService {
-    constructor(){
+    constructor() {
         super("/api/profiles/marketplaces/available/");
     }
 
     updateAuthorization(profileID, marketplaceID, code, success, error) {
-        console.log("Codigo: "+code);
         fetch(`api/profiles/${profileID}/marketplaces/${marketplaceID}/authorization`, {
             method: "PUT",
             headers: new Headers({

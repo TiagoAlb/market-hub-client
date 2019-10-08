@@ -5,7 +5,7 @@ import CompanyService from '../../services/CompanyServices/CompanyService.jsx';
 import MarketplaceIcon from '../../components/MarketplaceIcon/MarketplaceIcon.jsx';
 import loginService from '../../services/LoginService.jsx';
 
-export default class AdsAvailableMarketplacesList extends Component {
+export default class AdAvailableMarketplacesList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -97,8 +97,8 @@ export default class AdsAvailableMarketplacesList extends Component {
                     <tr style={{ float: 'right' }}>
                         {this.state.items.map((i, key) => {
                             return (
-                                <td style={{ paddingLeft: '2px' }}>
-                                    <MarketplaceIcon id={i.id} idItem={"ads_icon_" + i.id} key={i.id}
+                                <td style={{ paddingLeft: '2px' }} key={key}>
+                                    <MarketplaceIcon id={i.id} idItem={"ad_icon_" + i.id} key={i.id}
                                         marketplaceName={i.name} avatar={`/api/marketplaces/` + i.id + `/image?` + loginService.getAuthorizationGet()}
                                         tam='50px'
                                         onClickCall={this.alterSelectedList}

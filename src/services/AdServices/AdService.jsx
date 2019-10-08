@@ -1,9 +1,9 @@
 import RestService from '../RestService.jsx';
 import loginService from '../LoginService.jsx';
 
-export default class AdsService extends RestService {
+export default class AdService extends RestService {
     constructor() {
-        super('/api/profiles/marketplaces/ads/');
+        super('/api/ads');
     }
 
     categoryNavSearch(search, success, error) {

@@ -10,7 +10,7 @@ import MercadoLivre from "../../assets/img/ml_white.png";
 import Button from "../../components/CustomButton/CustomButton.jsx";
 import MarketplaceIcon from "../../components/MarketplaceIcon/MarketplaceIcon.jsx";
 import { iconsArray } from "../../variables/Variables.jsx";
-import AdsCreate from "./AdsCreate.jsx";
+import AdCreate from "./AdCreate.jsx";
 
 const buttons_ads = [
   {
@@ -48,12 +48,12 @@ class Ads extends Component {
     }));
   }
 
-  createAds() {
+  createAd() {
     return (
       <Modal isOpen={this.state.modal} toggle={this.toggle}>
         <ModalHeader toggle={this.toggle}>Publicar Anúncio</ModalHeader>
         <ModalBody style={{ margin: "0", padding: "0" }}>
-          <AdsCreate profile_id={this.props.profile.id} />
+          <AdCreate profile_id={this.props.profile.id} />
         </ModalBody>
       </Modal>
     );
@@ -123,7 +123,7 @@ class Ads extends Component {
             </Col>
           </Row>
         </Container>
-        {this.createAds()}
+        {this.createAd()}
       </div>
     );
   }

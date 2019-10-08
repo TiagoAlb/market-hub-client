@@ -106,8 +106,8 @@ class Marketplaces extends Component {
                             <FormGroup>
                                 <Label for="linkMarketplace">Vincular Marketplace</Label>
                                 <Input type="select" name="select" id="linkMarketplace" onChange={(e) => { this.setValues("linkMarketplaceID", e.target.value) }}>
-                                    {this.state.availableMarketplaces.map((marketplace) => {
-                                        return <option value={marketplace.id}>{marketplace.name}</option>
+                                    {this.state.availableMarketplaces.map((marketplace, key) => {
+                                        return <option key={key} value={marketplace.id}>{marketplace.name}</option>
                                     })}
                                 </Input>
                             </FormGroup>

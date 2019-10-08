@@ -76,17 +76,17 @@ class CompanyRegistration extends Component {
 
     createProfile() {
         let profile = this.state.profile;
-        this.CompanyService.create(profile,
+        this.CompanyService.createProfile(profile,
             (success) => {
                 alert("Usuário Cadastrado com Sucesso");
                 this.CompanyService.insertImage(success.id, this.state.file,
                     (success) => {
                         console.log("Imagem cadastrada!");
+                        this.setValues("success", <Redirect to="/" />);
                     }, (error) => {
                         console.log(error);
                     }
                 )
-                this.setValues("success", <Redirect to="/" />);
             }, (error) => {
                 console.log("Erro!");
                 console.log(error);
@@ -154,147 +154,149 @@ class CompanyRegistration extends Component {
                 <div className="main">
                     <div className="content" style={{ backgroundColor: '#F1F1F1', padding: '5%' }}>
                         <Container fluid>
-                            <Row>
-                                <Col>
-                                    <Card
-                                        title="Cadastre sua empresa"
-                                        content={
-                                            <Form className="form_create" onSubmit={(e) => {
-                                                e.preventDefault();
-                                                this.createProfile();
-                                            }}>
-                                                <Row>
-                                                    <Col>
-                                                        <Label style={{ fontWeight: 'bold' }}>DADOS DA CONTA</Label>
-                                                    </Col>
-                                                </Row>
-                                                <Row>
-                                                    <Col md={5}>
-                                                        <FormGroup>
-                                                            <Label>NOME FANTASIA</Label>
-                                                            <Input
-                                                                type="text"
-                                                                value={this.state.profile.name}
-                                                                onChange={(e) => {
-                                                                    e.preventDefault();
-                                                                    this.setProfileValues("name", e.target.value);
-                                                                }}
-                                                            />
-                                                        </FormGroup>
-                                                    </Col>
-                                                    <Col md={7}>
-                                                        <FormGroup>
-                                                            <Label>DESCRIÇÃO DA EMPRESA</Label>
-                                                            <Input
-                                                                type="textarea"
-                                                                value={this.state.profile.description}
-                                                                onChange={(e) => {
-                                                                    e.preventDefault();
-                                                                    this.setProfileValues("description", e.target.value);
-                                                                }}
-                                                            />
-                                                        </FormGroup>
-                                                    </Col>
-                                                </Row>
-                                                <Row>
-                                                    <Col md={6}>
-                                                        <FormGroup>
-                                                            <Label>EMAIL</Label>
-                                                            <Input
-                                                                type="text"
-                                                                value={this.state.profile.emailAddress}
-                                                                placeholder="Ex: seuemail@email.com"
-                                                                onChange={(e) => {
-                                                                    e.preventDefault();
-                                                                    this.setProfileValues("emailAddress", e.target.value);
-                                                                }}
-                                                            />
-                                                        </FormGroup>
-                                                    </Col>
-                                                    <Col md={6}>
-                                                        <FormGroup>
-                                                            <Label>CONFIRME SEU EMAIL</Label>
-                                                            <Input
-                                                                type="text"
-                                                                value={this.state.confirmEmailAddress}
-                                                                placeholder="Confirme seu email"
-                                                                onChange={(e) => {
-                                                                    e.preventDefault();
-                                                                    this.setValues("confirmEmailAddress", e.target.value);
-                                                                }}
-                                                            />
-                                                        </FormGroup>
-                                                    </Col>
-                                                </Row>
-                                                <Row>
-                                                    <Col md={6}>
-                                                        <FormGroup>
-                                                            <Label>SENHA</Label>
-                                                            <Input
-                                                                type="password"
-                                                                placeholder="********"
-                                                                value={this.state.profile.newPassword}
-                                                                onChange={(e) => {
-                                                                    e.preventDefault();
-                                                                    this.setProfileValues("newPassword", e.target.value);
-                                                                }}
-                                                            />
-                                                        </FormGroup>
-                                                    </Col>
-                                                    <Col md={6}>
-                                                        <FormGroup>
-                                                            <Label>CONFIRME SUA SENHA</Label>
-                                                            <Input
-                                                                type="password"
-                                                                placeholder="********"
-                                                                value={this.state.confirmPassword}
-                                                                onChange={(e) => {
-                                                                    e.preventDefault();
-                                                                    this.setValues("confirmPassword", e.target.value);
-                                                                }}
-                                                            />
-                                                        </FormGroup>
-                                                    </Col>
-                                                </Row>
-                                                <Row>
-                                                    <Col>
-                                                        <Label style={{ fontWeight: 'bold' }}>DADOS DA EMPRESA</Label>
-                                                    </Col>
-                                                </Row>
-                                                <Row>
-                                                    <Col md={7}>
-                                                        <FormGroup>
-                                                            <Label>RAZÃO SOCIAL</Label>
-                                                            <Input
-                                                                type="text"
-                                                                value={this.state.profile.legalName}
-                                                                onChange={(e) => {
-                                                                    e.preventDefault();
-                                                                    this.setProfileValues("legalName", e.target.value);
-                                                                }}
-                                                            />
-                                                        </FormGroup>
-                                                    </Col>
-                                                    <Col md={5}>
-                                                        <FormGroup>
-                                                            <Label>CNPJ / CPF</Label>
-                                                            <Input
-                                                                type="text"
-                                                                value={this.state.profile.cnpjCpf}
-                                                                onChange={(e) => {
-                                                                    e.preventDefault();
-                                                                    this.setProfileValues("cnpjCpf", e.target.value);
-                                                                }}
-                                                            />
-                                                        </FormGroup>
-                                                    </Col>
-                                                </Row>
-                                            </Form>
-                                        }
-                                    />
-                                </Col>
-                                {this.changeProfileImage()}
-                            </Row>
+                            <Form className="form_create" onSubmit={(e) => {
+                                e.preventDefault();
+                                this.createProfile();
+                            }}>
+                                <Row>
+                                    <Col>
+                                        <Card
+                                            title="Cadastre sua empresa"
+                                            content={
+                                                <div>
+                                                    <Row>
+                                                        <Col>
+                                                            <Label style={{ fontWeight: 'bold' }}>DADOS DA CONTA</Label>
+                                                        </Col>
+                                                    </Row>
+                                                    <Row>
+                                                        <Col md={5}>
+                                                            <FormGroup>
+                                                                <Label>NOME FANTASIA</Label>
+                                                                <Input
+                                                                    type="text"
+                                                                    value={this.state.profile.name}
+                                                                    onChange={(e) => {
+                                                                        e.preventDefault();
+                                                                        this.setProfileValues("name", e.target.value);
+                                                                    }}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                        <Col md={7}>
+                                                            <FormGroup>
+                                                                <Label>DESCRIÇÃO DA EMPRESA</Label>
+                                                                <Input
+                                                                    type="textarea"
+                                                                    value={this.state.profile.description}
+                                                                    onChange={(e) => {
+                                                                        e.preventDefault();
+                                                                        this.setProfileValues("description", e.target.value);
+                                                                    }}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+                                                    <Row>
+                                                        <Col md={6}>
+                                                            <FormGroup>
+                                                                <Label>EMAIL</Label>
+                                                                <Input
+                                                                    type="text"
+                                                                    value={this.state.profile.emailAddress}
+                                                                    placeholder="Ex: seuemail@email.com"
+                                                                    onChange={(e) => {
+                                                                        e.preventDefault();
+                                                                        this.setProfileValues("emailAddress", e.target.value);
+                                                                    }}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                        <Col md={6}>
+                                                            <FormGroup>
+                                                                <Label>CONFIRME SEU EMAIL</Label>
+                                                                <Input
+                                                                    type="text"
+                                                                    value={this.state.confirmEmailAddress}
+                                                                    placeholder="Confirme seu email"
+                                                                    onChange={(e) => {
+                                                                        e.preventDefault();
+                                                                        this.setValues("confirmEmailAddress", e.target.value);
+                                                                    }}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+                                                    <Row>
+                                                        <Col md={6}>
+                                                            <FormGroup>
+                                                                <Label>SENHA</Label>
+                                                                <Input
+                                                                    type="password"
+                                                                    placeholder="********"
+                                                                    value={this.state.profile.newPassword}
+                                                                    onChange={(e) => {
+                                                                        e.preventDefault();
+                                                                        this.setProfileValues("newPassword", e.target.value);
+                                                                    }}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                        <Col md={6}>
+                                                            <FormGroup>
+                                                                <Label>CONFIRME SUA SENHA</Label>
+                                                                <Input
+                                                                    type="password"
+                                                                    placeholder="********"
+                                                                    value={this.state.confirmPassword}
+                                                                    onChange={(e) => {
+                                                                        e.preventDefault();
+                                                                        this.setValues("confirmPassword", e.target.value);
+                                                                    }}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+                                                    <Row>
+                                                        <Col>
+                                                            <Label style={{ fontWeight: 'bold' }}>DADOS DA EMPRESA</Label>
+                                                        </Col>
+                                                    </Row>
+                                                    <Row>
+                                                        <Col md={7}>
+                                                            <FormGroup>
+                                                                <Label>RAZÃO SOCIAL</Label>
+                                                                <Input
+                                                                    type="text"
+                                                                    value={this.state.profile.legalName}
+                                                                    onChange={(e) => {
+                                                                        e.preventDefault();
+                                                                        this.setProfileValues("legalName", e.target.value);
+                                                                    }}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                        <Col md={5}>
+                                                            <FormGroup>
+                                                                <Label>CNPJ / CPF</Label>
+                                                                <Input
+                                                                    type="text"
+                                                                    value={this.state.profile.cnpjCpf}
+                                                                    onChange={(e) => {
+                                                                        e.preventDefault();
+                                                                        this.setProfileValues("cnpjCpf", e.target.value);
+                                                                    }}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+                                                </div>
+                                            }
+                                        />
+                                    </Col>
+                                    {this.changeProfileImage()}
+                                </Row>
+                            </Form>
                         </Container>
                     </div>
                 </div>
