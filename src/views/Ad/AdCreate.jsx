@@ -144,7 +144,7 @@ class AdCreate extends Component {
                 //     if (this.validateImage(fileData)) {
                 reader.onloadend = () => {
                     let images_upload = this.state.image_upload_list;
-                    images_upload.push({ 'img': reader.result, 'uploadingProgress': '0%' });
+                    images_upload.push({ img: reader.result, uploadingProgress: '0%', startUpload: false });
 
                     this.setState({ image_upload_list: images_upload });
                 };
@@ -235,6 +235,7 @@ class AdCreate extends Component {
                     (uploading) => {
                         let image_list = this.state.image_upload_list;
                         image_list[index].uploadingProgress = uploading;
+                        image_list[index].startUpload = true;
                         this.setState({ image_upload_list: image_list });
                     }, (started) => {
                         this.setState({ uploadFileRequired: true });

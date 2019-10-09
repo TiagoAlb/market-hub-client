@@ -18,17 +18,26 @@ export class ImageSelecion extends Component {
     hover() {
         this.setState({ iconAdd: AddHover });
     }
+
     out() {
         this.setState({ iconAdd: Add });
+    }
+
+    uploadFileProgress() {
+        if (this.props.startUpload) {
+            return (
+                <div className="image-selection-loading">
+                    <Spinner color="primary" />
+                    {this.props.uploadingProgress}
+                </div>
+            );
+        } else return <div></div>;
     }
 
     render() {
         return (
             <div className="image-selection">
-                <div className="image-selection-loading">
-                    <Spinner color="primary" />
-                    {this.props.uploadingProgress}
-                </div>
+                {this.uploadFileProgress()}
                 <img src={this.props.src} alt={this.props.alt} />
             </div>
         );
