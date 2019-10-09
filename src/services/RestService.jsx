@@ -1,4 +1,5 @@
 import loginService from "./LoginService.jsx";
+import { finished } from "stream";
 
 export default class RestService {
 
@@ -78,7 +79,7 @@ export default class RestService {
         });
     }
 
-    uploadFileProgress(id, file) {
+    uploadFileProgress(id, file, uploading, started, finished, error) {
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
 
@@ -96,15 +97,19 @@ export default class RestService {
                 // o envio ocorreu com sucesso
                 console.log(event);
                 resolve(); // resolvemos nossa promise
+                finished();
             }
 
             if (xhr.upload) {
                 // caso tenhamos acesso a esta informação
                 xhr.upload.onloadstart = () => {
-                    console.log('0%');
+                    started();
                 }
                 xhr.upload.onprogress = progress => {
-                    console.log(Math.round((progress.loaded * 100) / progress.total) + '%');
+                    uploading(Math.round((progress.loaded * 100) / progress.total) + '%');
+                }
+                xhr.upload.onerror = () => {
+                    error();
                 }
             } else {
                 // tratamento em navegadores que não suportam xhr.upload

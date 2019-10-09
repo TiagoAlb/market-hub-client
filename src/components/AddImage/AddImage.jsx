@@ -33,7 +33,7 @@ export class AddImage extends Component {
         </label>
         <input id="file-input"
           accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
-          type="file" multiple=""
+          type="file" multiple="true"
           onChange={(e) => {
             e.preventDefault();
             this._handleImageChange(e);

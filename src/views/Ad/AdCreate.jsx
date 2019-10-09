@@ -43,11 +43,12 @@ class AdCreate extends Component {
                 },
                 marketplaces: []
             },
-            file: new FormData(),
+            files: [],
             image_upload_list: [],
             marketplaces_available_list: [],
             category_nav_list: {},
-            category_list: {}
+            category_list: {},
+            uploadFileRequired: false
         }
         this.incrementDecrementStep = this.incrementDecrementStep.bind(this);
         this.setAdValues = this.setAdValues.bind(this);
@@ -69,12 +70,11 @@ class AdCreate extends Component {
                 this.setState({
                     category_nav_list: success
                 });
-                if (success.length > 0) {
-                    this.setProductValues('ml_id', success[success.length - 1]);
+                this.setProductValues('ml_id', success[success.length - 1]);
+                if (success.length > 0)
                     this.categorySearch(success[success.length - 1].id, '');
-                } else {
+                else
                     this.categorySearch('', '');
-                }
             }, (error) => {
                 console.log('Erro!');
                 console.log(error);
@@ -127,27 +127,32 @@ class AdCreate extends Component {
 
     _handleImageChange(e) {
         e.preventDefault();
-        let reader = new FileReader();
-        let fileData = e.target.files[0];
-        let data = new FormData();
-        data.append('file', fileData);
-        data.append('name', 'profile_avatar');
-        data.append('description', 'Image profile');
+        this.setState({ uploadFileRequired: true });
+        let images = this.state.files;
+        let imageFiles = e.target.files;
+        if (imageFiles.length > 0) {
+            Object.keys(imageFiles).map((prop, index) => {
+                let reader = new FileReader();
+                let fileData = imageFiles[index];
+                let data = new FormData();
+                data.append('file', fileData);
+                data.append('name', 'profile_avatar');
+                data.append('description', 'Image profile');
 
-        let images = this.state.file;
-        // images.push({ data });
+                images.push({ file: data });
 
-        this.setState((state) => state.file = data);
+                //     if (this.validateImage(fileData)) {
+                reader.onloadend = () => {
+                    let images_upload = this.state.image_upload_list;
+                    images_upload.push({ 'img': reader.result, 'uploadingProgress': '0%' });
 
-        //     if (this.validateImage(fileData)) {
-        reader.onloadend = () => {
-            let images_upload = this.state.image_upload_list;
-            images_upload.push({ 'img': reader.result });
-
-            this.setState({ image_upload_list: images_upload });
-        };
-        reader.readAsDataURL(fileData)
-        // }
+                    this.setState({ image_upload_list: images_upload });
+                };
+                reader.readAsDataURL(fileData)
+                // }
+            });
+        }
+        this.setState((state) => state.files = images);
     }
 
     validateImage(file) {
@@ -190,9 +195,7 @@ class AdCreate extends Component {
             default:
                 break;
         }
-        if(this.state.category_nav_list.length > 0) {
-            this.setProductValues('ml_id', this.state.category_nav_list[this.state.category_nav_list.length - 1]);
-        }
+        this.setProductValues('ml_id', this.state.category_nav_list[this.state.category_nav_list.length - 1]);
     }
 
     setAdValues(attribute, value) {
@@ -204,7 +207,6 @@ class AdCreate extends Component {
     }
 
     setProductValues(attribute, value) {
-        console.log(value);
         this.setState(
             (state) => state.ad['category'] = {
                 id: 0,
@@ -227,8 +229,24 @@ class AdCreate extends Component {
                    console.log(error);
                }
            )*/
-
-        this.AdService.uploadFileProgress(this.state.ad.id, this.state.file);
+        if (this.state.files.length > 0) {
+            this.state.files.map((prop, index) => {
+                this.AdService.uploadFileProgress(this.state.ad.id, prop.file,
+                    (uploading) => {
+                        let image_list = this.state.image_upload_list;
+                        image_list[index].uploadingProgress = uploading;
+                        this.setState({ image_upload_list: image_list });
+                    }, (started) => {
+                        this.setState({ uploadFileRequired: true });
+                    }, (finished) => {
+                        this.setState({ uploadFileRequired: false });
+                    }, (error) => {
+                        console.log('Erro!');
+                        console.log(error);
+                    }
+                );
+            });
+        }
     }
 
     incrementDecrementStep(condition) {
@@ -239,17 +257,18 @@ class AdCreate extends Component {
                 this.create();
             }
         }
-        if (this.state.step > 4) {
+        if (this.state.uploadFileRequired) {
             this.insertImages();
-        }
-        if (condition === 'increment') {
-            this.setState({
-                step: this.state.step + 1
-            });
-        } else if (condition === 'decrement') {
-            this.setState({
-                step: this.state.step - 1
-            });
+        } else {
+            if (condition === 'increment') {
+                this.setState({
+                    step: this.state.step + 1
+                });
+            } else if (condition === 'decrement') {
+                this.setState({
+                    step: this.state.step - 1
+                });
+            }
         }
 
     }

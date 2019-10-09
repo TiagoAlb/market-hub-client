@@ -77,9 +77,8 @@ export default class CompanyService extends RestService {
             method: "PUT",
             body: file
         }).then((result) => {
-            console.log(result);
             if (result.ok) {
-                result.json().then(success)
+                success();
             } else {
                 result.json().then(
                     (errorResult) => error(errorResult)

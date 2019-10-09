@@ -918,6 +918,19 @@ body > .navbar-collapse[data-color="purple"]:after {
     width: 100%;
     height: 100%; }
 
+.image-selection-loading {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 82px;
+  height: 82px; }
+
+.image-selection-loading {
+  background-color: #FFFFFF;
+  opacity: 0.65; }
+
 .alert {
   border: 0;
   border-radius: 0;

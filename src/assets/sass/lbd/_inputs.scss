@@ -196,3 +196,17 @@
     }
 }
 
+.image-selection-loading {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 82px;
+    height: 82px;
+}
+.image-selection-loading {
+    background-color: #FFFFFF;
+    opacity: 0.65;
+}
+
