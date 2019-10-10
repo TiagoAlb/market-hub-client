@@ -336,7 +336,7 @@ class Step4 extends Component {
                     <td><AddImage _handleImageChange={this.props._handleImageChange} /></td>
                     {this.props.image_upload_list.length > 0 ?
                         this.props.image_upload_list.map((prop, key) => {
-                            return <td><ImageSelection key={key} src={prop.img} alt={"Image " + key} startUpload={prop.startUpload} uploadingProgress={prop.uploadingProgress}/></td>
+                            return <td key={key}><ImageSelection src={prop.img} alt={"Image " + key} startUpload={prop.startUpload} uploadingProgress={prop.uploadingProgress} /></td>
                         })
                         : <td></td>}
                 </tr>

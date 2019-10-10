@@ -70,7 +70,7 @@ class AdCreate extends Component {
                 this.setState({
                     category_nav_list: success
                 });
-                if(success.length > 0)
+                if (success.length > 0)
                     this.setProductValues('ml_id', success[success.length - 1]);
                 if (success.length > 0)
                     this.categorySearch(success[success.length - 1].id, '');
@@ -196,7 +196,7 @@ class AdCreate extends Component {
             default:
                 break;
         }
-        if(this.state.category_nav_list.length > 0)
+        if (this.state.category_nav_list.length > 0)
             this.setProductValues('ml_id', this.state.category_nav_list[this.state.category_nav_list.length - 1]);
     }
 
@@ -224,13 +224,6 @@ class AdCreate extends Component {
     }
 
     insertImages() {
-        /*   this.AdService.insertImages(this.state.ad.id, this.state.file,
-               (success) => {
-                   console.log("Imagens cadastradas!");
-               }, (error) => {
-                   console.log(error);
-               }
-           )*/
         if (this.state.files.length > 0) {
             this.state.files.map((prop, index) => {
                 this.AdService.uploadFileProgress(this.state.ad.id, prop.file,
@@ -242,7 +235,10 @@ class AdCreate extends Component {
                     }, (started) => {
                         this.setState({ uploadFileRequired: true });
                     }, (finished) => {
-                        this.setState({ uploadFileRequired: false });
+                        let image_list = this.state.image_upload_list;
+                        image_list[index].uploadingProgress = 'Concluído';
+                        image_list[index].startUpload = false;
+                        this.setState({ image_upload_list: image_list, uploadFileRequired: false });
                     }, (error) => {
                         console.log('Erro!');
                         console.log(error);
