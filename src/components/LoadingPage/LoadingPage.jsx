@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Route from "react-router-dom/es/Route";
 import app from "../../routes/app.jsx";
 import loginService from "../../services/LoginService.jsx";
+import Loading from "../Loading/Loading.jsx";
 
 
 class LoadingPage extends Component {
@@ -16,7 +17,7 @@ class LoadingPage extends Component {
     loading() {
         loginService.validateLogin(() => {
             this.setState({
-                concluded: <Route path="/" name="Home" component={app}/>
+                concluded: <Route path="/" name="Home" component={app} />
             });
         });
     }
@@ -25,7 +26,7 @@ class LoadingPage extends Component {
         if (this.state.concluded) {
             return this.state.concluded;
         } else return (
-            <div/>
+            <Loading />
         );
     }
 }

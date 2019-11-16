@@ -15,6 +15,7 @@ export default class MarketplaceService extends RestService {
             }),
             body: JSON.stringify(code)
         }).then((result) => {
+            console.log(result);
             if (result.ok) {
                 success();
             } else {

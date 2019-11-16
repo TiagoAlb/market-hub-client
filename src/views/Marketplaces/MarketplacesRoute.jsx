@@ -11,9 +11,10 @@ class MarketplacesPageRoute extends Component {
 
 class LoginRoute extends Component {
     render() {
-        return <MarketplaceLogin profile={this.props.profile} />
+        return <MarketplaceLogin id={this.props.match.params.id} />
     }
 }
+
 export default class MarketplacesRoute extends Component {
     render() {
         return (
@@ -26,22 +27,8 @@ export default class MarketplacesRoute extends Component {
                             profile={this.props.profile}
                         />}
                 />
-                <Route
-                    exact path="/marketplaces/login"
-                    render={(props) =>
-                        <MarketplacesPageRoute
-                            {...props}
-                            profile={this.props.profile}
-                        />}
-                />
-                <Route
-                    path="/marketplaces/:id/login"
-                    render={(props) =>
-                        <LoginRoute
-                            {...props}
-                            profile={this.props.profile}
-                        />}
-                />
+                <Route path="/marketplaces/login" component={MarketplaceLogin} />
+                <Route exact path="/marketplaces/:id/login" component={LoginRoute} />
             </Switch>
         );
     }

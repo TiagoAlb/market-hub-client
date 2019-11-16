@@ -4,24 +4,7 @@ import CustomButton from "../../components/CustomButton/CustomButton.jsx";
 import CompanyService from "../../services/CompanyServices/CompanyService.jsx";
 import MarketplaceService from "../../services/MarketplaceServices/MarketplaceService.jsx";
 import Screen from "../../Useful/Screen.jsx";
-import MarketplaceLogin from './MarketplaceLogin.jsx';
 import MarketplacesList from "./MarketplacesList.jsx";
-
-const modal_header_style = {
-    backgroundColor: "transparent",
-    outline: "none",
-    zIndex: "2",
-    position: "absolute",
-    width: "100%",
-    border: "0"
-}
-
-const modal_body_style = {
-    padding: "0",
-    zIndex: "1",
-    width: "100%",
-    height: "100%"
-}
 
 class Marketplaces extends Component {
     constructor(props) {
@@ -32,6 +15,7 @@ class Marketplaces extends Component {
             availableMarketplaces: [],
             modal: false,
             idLogin: 0,
+            popUpLogin: ""
         };
         this.MarketplaceService = new MarketplaceService();
         this.CompanyService = new CompanyService();
@@ -60,10 +44,23 @@ class Marketplaces extends Component {
     }
 
     toggle(id) {
-        this.setState(prevState => ({
-            idLogin: id,
-            modal: !prevState.modal
-        }));
+        sessionStorage.removeItem("marketplace_authentication");
+        sessionStorage.setItem("marketplace_authentication", JSON.stringify(
+            {
+                "id": id,
+                "profile_id": this.props.profile.id
+            }
+        ));
+        this.openPopUp('https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=3919471605726765', 'marketplace_login', 548, 625);
+    }
+
+    openPopUp(myURL, title, myWidth, myHeight) {
+        let newWidthScreen = window.innerWidth + (window.screenLeft * 2);
+        let newHeightScreen = window.innerHeight + (window.screenTop * 2);
+
+        let left = (newWidthScreen - myWidth) / 2;
+        let top = (newHeightScreen - myHeight) / 4;
+        window.open(myURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + myWidth + ', height=' + myHeight + ', top=' + top + ', left=' + left);
     }
 
     linkMarketplace() {
@@ -125,15 +122,6 @@ class Marketplaces extends Component {
     }
 
     render() {
-        let mp_auth = sessionStorage.getItem("marketplace_authentication");
-        if (this.state.modal !== false && mp_auth !== null && JSON.parse(mp_auth).status === 'true') {
-            this.updateAuthorization(JSON.parse(mp_auth).code);
-            sessionStorage.removeItem("marketplace_authentication");
-            mp_auth = "";
-            this.toggle(0);
-            window.location.href = "/#/marketplaces";
-        }
-
         return (
             <div className="content">
                 <Container fluid>
@@ -147,12 +135,6 @@ class Marketplaces extends Component {
                             />
                         </Col>
                     </Row>
-                    <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                        <ModalHeader toggle={this.toggle} style={modal_header_style} />
-                        <ModalBody style={modal_body_style}>
-                            <MarketplaceLogin idLogin={this.state.idLogin} cancelToken={false} />
-                        </ModalBody>
-                    </Modal>
                 </Container>
             </div>
         );

@@ -48,6 +48,15 @@ class app extends Component {
                         <Header {...this.props} />
                         <Switch> {
                             loggedRoutes.map((prop, key) => {
+                                if (prop.name === "Marketplaces")
+                                    return (
+                                        <Route
+                                            path={prop.path}
+                                            key={key}
+                                            render={(props) => <prop.component  {...props}
+                                                profile={loginService.logged()} />}
+                                        />
+                                    );
                                 if (prop.name === "Notifications")
                                     return (
                                         <Route
@@ -67,17 +76,6 @@ class app extends Component {
                                             key={key}
                                             render={(props) => <prop.component  {...props}
                                                 profile={loginService.logged()} />}
-                                            profile={loginService.logged()}
-                                        />
-                                    );
-                                if (prop.name === "Marketplaces")
-                                    return (
-                                        <Route
-                                            path={prop.path}
-                                            key={key}
-                                            render={(props) => <prop.component  {...props}
-                                                profile={loginService.logged()} />}
-                                            profile={loginService.logged()}
                                         />
                                     );
                                 if (prop.name === "Anúncios")
@@ -87,7 +85,6 @@ class app extends Component {
                                             key={key}
                                             render={(props) => <prop.component  {...props}
                                                 profile={loginService.logged()} />}
-                                            profile={loginService.logged()}
                                         />
                                     );
                                 if (prop.redirect)

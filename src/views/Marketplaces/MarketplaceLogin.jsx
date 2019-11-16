@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import Iframe from 'react-iframe';
-import { Spinner } from "reactstrap";
+import MarketplaceService from "../../services/MarketplaceServices/MarketplaceService.jsx";
+import Loading from "../../components/Loading/Loading.jsx";
 
 class MarketplaceLogin extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            url: this.getUrlParams(window.location.href)
-        }
+
+        this.MarketplaceService = new MarketplaceService();
     }
 
     getUrlParams(search) {
@@ -18,39 +17,28 @@ class MarketplaceLogin extends Component {
         }, {})
     }
 
-    render() {
-        let modalBody = <Spinner color="primary" />;
-        if (this.state.url.authentication === 'true') {
-            sessionStorage.setItem("marketplace_authentication", JSON.stringify(
-                {
-                    "status": this.state.url.authentication,
-                    "code": this.state.url.code
-                }
-            ));
-            window.parent.location.href = "/#/marketplaces/login";
-        } else {
-            sessionStorage.removeItem("marketplace_authentication");
-            if (this.props.cancelToken === true) {
-                sessionStorage.setItem("marketplace_authentication", JSON.stringify(
-                    {
-                        "status": "true",
-                        "code": "cancelToken"
-                    }
-                ));
-                window.parent.location.href = "/#/marketplaces/login";
-            } else {
-                modalBody = <Iframe url="http://auth.mercadolivre.com.br/authorization?response_type=code&client_id=3919471605726765"
-                    id="marketplaceLogin"
-                    width="100%"
-                    height="550px"
-                    frameBorder="0"
-                />
+    updateAuthorization() {
+        let data = JSON.parse(sessionStorage.getItem("marketplace_authentication"));
+        this.MarketplaceService.updateAuthorization(data.profile_id, data.id, this.getUrlParams(window.location.href).code,
+            (success) => {
+                console.log(success);
+                window.close();
+            }, (error) => {
+                console.log("Erro!");
+                console.log(error);
+                window.close();
             }
+        )
+    }
+
+    render() {
+        if (this.getUrlParams(window.location.href).code !== null && sessionStorage.getItem("marketplace_authentication") !== null) {
+            this.updateAuthorization();
+            sessionStorage.removeItem("marketplace_authentication");
+        } else {
+            window.close();
         }
-        return (
-            <div>
-                {modalBody}
-            </div>
-        );
+
+        return <Loading />
     }
 } export default MarketplaceLogin;

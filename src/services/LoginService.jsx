@@ -42,7 +42,6 @@ class LoginService {
             } else {
                 sessionStorage.removeItem("token");
                 console.log("error " + response.json().then());
-                window.location.href = "/#/";
             }
         }).catch();
     }
